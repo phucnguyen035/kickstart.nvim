@@ -132,22 +132,13 @@ require('lazy').setup({
   },
 
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
@@ -166,7 +157,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
