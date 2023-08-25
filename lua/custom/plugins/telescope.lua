@@ -1,6 +1,8 @@
 -- Fuzzy Finder (files, lsp, etc)
 return {
   'nvim-telescope/telescope.nvim',
+  cond = not vim.g.vscode,
+  cmd = 'Telescope',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
@@ -9,8 +11,6 @@ return {
     -- requirements installed.
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      -- NOTE: If you are having trouble with this installation,
-      --       refer to the README for telescope-fzf-native for more instructions.
       build = 'make',
       cond = function()
         return vim.fn.executable 'make' == 1
@@ -21,11 +21,15 @@ return {
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`
     defaults = {
+      path_display = { 'smart' },
+      layout_strategy = 'flex',
       mappings = {
         i = {
-          ['<C-u>'] = false,
-          ['<C-d>'] = false,
+          ['<esc>'] = 'close',
         },
+        n = {
+          ["jk"] = "close",
+        }
       },
     },
   },
@@ -90,6 +94,20 @@ return {
         require('telescope.builtin').diagnostics()
       end,
       desc = '[S]earch [D]iagnostics',
+    },
+    {
+      '<leader>sr',
+      function()
+        require('telescope.builtin').resume()
+      end,
+      desc = '[S]earch [R]esume',
+    },
+    {
+      '<leader>sb',
+      function()
+        require('telescope.builtin').current_buffer_fuzzy_find { skip_empty_lines = true }
+      end,
+      desc = '[S]earch [B]uffer',
     },
   },
 }
