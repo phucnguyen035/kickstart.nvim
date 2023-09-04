@@ -18,22 +18,23 @@ return {
 		cond = not vim.g.vscode,
 		opts = function()
 			local defaults = require 'formatter.defaults'
+			-- Using prettier for now because prettierd does not support version 3
 			return {
 				filetype = {
 					typescriptreact = {
-						defaults.prettierd,
+						defaults.prettier,
 					},
 					typescript = {
-						defaults.prettierd,
+						defaults.prettier,
 					},
 					javascript = {
-						defaults.prettierd,
+						defaults.prettier,
 					},
 					javascriptreact = {
-						defaults.prettierd,
+						defaults.prettier,
 					},
 					astro = {
-						defaults.prettierd,
+						defaults.prettier,
 					},
 				},
 			}
