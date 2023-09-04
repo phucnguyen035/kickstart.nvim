@@ -77,14 +77,23 @@ return {
       {
         '<leader>fd',
         function()
-          require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
+          local mf = require('mini.files')
+          local path = vim.api.nvim_buf_get_name(0)
+          -- Get latest path if path ends with /Starter
+          if path:sub(-8) == '/Starter' then
+            path = mf.get_latest_path()
+          end
+          print(path)
+
+          mf.open(path)
         end,
         desc = 'Open [F]iles in current [D]irectory',
+        silent = true
       },
       {
         '<leader>fr',
         function()
-          require('mini.files').open(vim.loop.cwd(), true)
+          require('mini.files').open(nil, false)
         end,
         desc = 'Open [F]iles in [R]oot diretory (cwd)',
       },
