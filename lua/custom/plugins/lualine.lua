@@ -47,7 +47,7 @@ return {
       theme = 'auto',
       component_separators = '|',
       section_separators = '',
-      disabled_filetypes = { statusline = { 'dashboard', 'alpha' } },
+      disabled_filetypes = { 'dashboard', 'alpha', 'starter' },
     },
     extensions = {
       'quickfix',
@@ -68,10 +68,16 @@ return {
           'diagnostics',
           symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
         },
-        { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-        { 'filename', path = 1 },
       },
-      lualine_x = {}
+      lualine_x = {
+        { 'filetype' }
+      },
     },
+    winbar = {
+      lualine_c = { { 'filename', path = 1 } },
+    },
+    inactive_winbar = {
+      lualine_c = { { 'filename', path = 1 } },
+    }
   },
 }

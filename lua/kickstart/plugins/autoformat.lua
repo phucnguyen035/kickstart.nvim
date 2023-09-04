@@ -5,6 +5,7 @@
 
 return {
   'neovim/nvim-lspconfig',
+  cond = not vim.g.vscode,
   config = function()
     -- Switch for controlling whether you want autoformatting.
     --  Use :KickstartFormatToggle to toggle autoformatting on or off
@@ -61,7 +62,7 @@ return {
             end
 
             vim.lsp.buf.format {
-              async = false,
+              async = true,
               filter = function(c)
                 return c.id == client.id
               end,

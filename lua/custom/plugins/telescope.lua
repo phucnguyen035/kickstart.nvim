@@ -28,8 +28,8 @@ return {
           ['<esc>'] = 'close',
         },
         n = {
-          ["jk"] = "close",
-        }
+          ['jk'] = 'close',
+        },
       },
     },
   },
@@ -37,6 +37,7 @@ return {
     local telescope = require 'telescope'
     telescope.setup(opts)
     telescope.load_extension 'fzf'
+    telescope.load_extension 'harpoon'
   end,
   keys = {
     {
@@ -105,7 +106,7 @@ return {
     {
       '<leader>sb',
       function()
-        require('telescope.builtin').current_buffer_fuzzy_find { skip_empty_lines = true }
+        require('telescope.builtin').current_buffer_fuzzy_find { skip_empty_lines = true, previewer = false }
       end,
       desc = '[S]earch [B]uffer',
     },
