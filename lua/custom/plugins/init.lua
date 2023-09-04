@@ -1,15 +1,9 @@
 -- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
-if vim.g.vscode then
-	return {}
-end
-
 return {
 	{
 		'ThePrimeagen/harpoon',
 		dependencies = 'nvim-lua/plenary.nvim',
+		cond = not vim.g.vscode,
 		opts = {},
 		keys = {
 			{ '<leader>ha', "<cmd>:lua require('harpoon.mark').add_file()<cr>",        desc = '[H]arpoon [A]dd' },
@@ -21,6 +15,7 @@ return {
 	{
 		'mhartington/formatter.nvim',
 		event = 'BufReadPost',
+		cond = not vim.g.vscode,
 		opts = function()
 			local defaults = require 'formatter.defaults'
 			return {
@@ -44,28 +39,17 @@ return {
 			}
 		end,
 	},
-	{
-		'ray-x/go.nvim',
-		dependencies = {
-			'ray-x/guihua.lua',
-			'neovim/nvim-lspconfig',
-			'nvim-treesitter/nvim-treesitter',
-		},
-		opts = {
-			lsp_gofumpt = true,
-		},
-		ft = { 'go', 'gomod' },
-		build = ':lua require("go.install").update_all_sync()',
-	},
 	-- Free alternative to Copilot
 	{
 		'Exafunction/codeium.vim',
+		cond = not vim.g.vscode,
 		event = 'BufEnter',
 		cmd = 'Codeium',
 	},
 	-- Diagnostics
 	{
 		'folke/trouble.nvim',
+		cond = not vim.g.vscode,
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		opts = {},
 		keys = {
@@ -80,6 +64,7 @@ return {
 	-- Zen Mode
 	{
 		'folke/zen-mode.nvim',
+		cond = not vim.g.vscode,
 		cmd = 'ZenMode',
 		opts = {
 			plugins = {
@@ -94,6 +79,7 @@ return {
 	},
 	{
 		"rgroli/other.nvim",
+		cond = not vim.g.vscode,
 		cmd = { "Other", "OtherClear", "OtherSplit", "OtherVSplit" },
 		keys = {
 			{ "<leader><TAB>", "<cmd>Other<CR>", desc = "Other", silent = true },

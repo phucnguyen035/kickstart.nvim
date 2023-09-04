@@ -277,5 +277,18 @@ return {
 		ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
+	},
+	{
+		'ray-x/go.nvim',
+		dependencies = {
+			'ray-x/guihua.lua',
+			'neovim/nvim-lspconfig',
+			'nvim-treesitter/nvim-treesitter',
+		},
+		opts = {
+			lsp_gofumpt = true,
+		},
+		ft = { 'go', 'gomod' },
+		build = ':lua require("go.install").update_all_sync()',
 	}
 }
