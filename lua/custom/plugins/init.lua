@@ -69,12 +69,8 @@ return {
 		cmd = 'ZenMode',
 		opts = {
 			plugins = {
-				tmux = {
-					enabled = true,
-				},
-				wezterm = {
-					enabled = true,
-				},
+				tmux = { enabled = true },
+				wezterm = { enabled = true },
 			},
 		},
 	},
