@@ -14,6 +14,7 @@ return {
 		event = { 'BufReadPre', 'BufNewFile' },
 		opts = {
 			-- See `:help gitsigns.txt`
+			current_line_blame = true,
 			signs = {
 				add = { text = '+' },
 				change = { text = '~' },
@@ -24,8 +25,11 @@ return {
 			on_attach = function(bufnr)
 				vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
 					{ buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-				vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-				vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+				vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk,
+					{ buffer = bufnr, desc = '[G]it go to [N]ext hunk' })
+				vim.keymap.set('n', '<leader>gp', require('gitsigns').preview_hunk,
+					{ buffer = bufnr, desc = '[G]it [P]review hunk' })
+				vim.keymap.set('n', '<leader>gb', require('gitsigns').blame_line, { buffer = bufnr, desc = '[G]it [B]lame' })
 			end,
 		},
 	}
