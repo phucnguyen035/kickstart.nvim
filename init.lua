@@ -17,8 +17,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim',     cond = not vim.g.vscode, event = 'BufReadPost', opts = {} },
 	{ import = 'kickstart.plugins' },
 	{ import = 'custom.plugins' },
 }, {

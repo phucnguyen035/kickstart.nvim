@@ -1,19 +1,11 @@
 return {
   {
-    -- Display the current context of thhe visible buffer contents
-    'nvim-treesitter/nvim-treesitter-context',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    event = 'BufReadPost',
-    opts = {
-      separator = '~',
-    },
-  },
-  {
     -- Syntax highlighting
     'nvim-treesitter/nvim-treesitter',
     event = 'BufRead',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'JoosepAlviste/nvim-ts-context-commentstring',
     },
     build = ':TSUpdate',
     config = function()
@@ -21,7 +13,8 @@ return {
       -- See `:help nvim-treesitter`
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'astro', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'javascript', 'svelte', 'vue', 'vimdoc', 'vim' },
+        ensure_installed = { 'astro', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'javascript', 'svelte', 'vue',
+          'vimdoc', 'vim' },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
@@ -81,7 +74,30 @@ return {
             },
           },
         },
+
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false
+        }
       }
     end,
   },
+  {
+    -- Display the current context of thhe visible buffer contents
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'BufRead',
+    opts = {
+      separator = '~',
+    },
+  },
+  {
+    'numToStr/Comment.nvim',
+    cond = not vim.g.vscode,
+    event = 'BufRead',
+    init = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook()
+      }
+    end
+  }
 }
