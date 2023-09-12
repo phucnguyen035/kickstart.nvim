@@ -4,7 +4,7 @@ local actions = {
   { name = 'Recent files', action = "Telescope oldfiles",      section = section_name },
   { name = 'Grep text',    action = 'Telescope live_grep',     section = section_name },
   { name = 'Marks',        action = "Telescope harpoon marks", section = section_name },
-  { name = "Quit Neovim",  action = "q",                       section = section_name },
+  { name = "Quit",         action = "qa",                      section = section_name },
 }
 
 return {
