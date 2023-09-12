@@ -101,7 +101,7 @@ return {
       function()
         require('telescope.builtin').resume()
       end,
-      desc = '[S]earch [R]esume',
+      desc = '[S]earch [C]ontinue',
     },
     {
       '<leader>sb',
