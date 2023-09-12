@@ -14,6 +14,7 @@ return {
       },
       ['<leader>s'] = {
         name = '+Search',
+        s = { '<cmd>Navbuddy<cr>', '[S]earch [S]ymbols' },
       },
       ['<leader>g'] = {
         name = '+Git',

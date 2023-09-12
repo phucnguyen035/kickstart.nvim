@@ -1,3 +1,7 @@
+if vim.g.vscode then
+	return {}
+end
+
 local function filter(arr, fn)
 	if type(arr) ~= 'table' then
 		return arr
@@ -47,10 +51,18 @@ return {
 			'folke/neodev.nvim',
 		},
 		config = function()
+			require('lspconfig.ui.windows').default_options = {
+				border = 'single'
+			}
+			local navbuddy = require("nvim-navbuddy")
+			local navic = require("nvim-navic")
 			-- [[ Configure LSP ]]
 			--  This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(client, bufnr)
-				-- NOTE: Remember that lua is a real programming language, and as such it is possible
+				if client.server_capabilities.documentSymbolProvider then
+					navbuddy.attach(client, bufnr)
+					navic.attach(client, bufnr)
+				end -- NOTE: Remember that lua is a real programming language, and as such it is possible
 				-- to define small helper and utility functions so you don't have to repeat yourself
 				-- many times.
 				--
@@ -70,7 +82,9 @@ return {
 				nmap('gd', function()
 					vim.lsp.buf.definition { on_list = on_list }
 				end, '[G]oto [D]efinition')
-				nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+				nmap('gr', function()
+					require('telescope.builtin').lsp_references({ include_declaration = false })
+				end, '[G]oto [R]eferences')
 				nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
 				nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 				nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
@@ -290,5 +304,27 @@ return {
 		},
 		ft = { 'go', 'gomod' },
 		build = ':lua require("go.install").update_all_sync()',
+	},
+	{
+		"SmiteshP/nvim-navic",
+		lazy = true,
+		opts = {
+			lsp = { auto_attach = true },
+			highlight = true
+		}
+	},
+	{
+		"SmiteshP/nvim-navbuddy",
+		lazy = true,
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+			"numToStr/Comment.nvim",
+			"nvim-telescope/telescope.nvim"
+		},
+		opts = {
+			lsp = { auto_attach = true },
+			highlight = true,
+		}
 	}
 }

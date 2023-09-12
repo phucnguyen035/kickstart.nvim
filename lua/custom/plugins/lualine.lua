@@ -74,7 +74,10 @@ return {
       },
     },
     winbar = {
-      lualine_c = { { 'filename', path = 1 } },
+      lualine_c = {
+        { 'filename', path = 1 },
+        { "navic", },
+      },
     },
     inactive_winbar = {
       lualine_c = { { 'filename', path = 1 } },
