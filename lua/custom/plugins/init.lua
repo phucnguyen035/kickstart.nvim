@@ -22,7 +22,7 @@ return {
 			return {
 				filetype = {
 					typescriptreact = {
-						defaults.prettier,
+						defaults.prettierd,
 					},
 					typescript = {
 						defaults.prettier,
@@ -31,7 +31,7 @@ return {
 						defaults.prettier,
 					},
 					javascriptreact = {
-						defaults.prettier,
+						defaults.prettierd,
 					},
 					astro = {
 						defaults.prettier,
