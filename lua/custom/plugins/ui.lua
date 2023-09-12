@@ -16,7 +16,16 @@ return {
         integrations = {
           harpoon = true,
           mini = true,
-          lsp_trouble = true
+          lsp_trouble = true,
+          treesitter = true,
+          gitsigns = true,
+          telescope = true,
+          cmp = true,
+          which_key = true,
+          ufo = true,
+          navic = {
+            enabled = true
+          }
         }
       })
 
@@ -36,5 +45,5 @@ return {
     "nmac427/guess-indent.nvim",
     event = "BufReadPre",
     opts = {}
-  }
+  },
 }
