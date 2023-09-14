@@ -39,7 +39,7 @@ local mode_map = {
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
-  event = 'VeryLazy',
+  event = 'BufRead',
   dependencies = 'nvim-tree/nvim-web-devicons',
   -- See `:help lualine.txt`
   opts = {
@@ -70,17 +70,17 @@ return {
         },
       },
       lualine_x = {
-        { 'filetype' }
+        { 'filetype' },
       },
     },
     winbar = {
       lualine_c = {
         { 'filename', path = 1 },
-        { "navic", },
+        { 'navic' },
       },
     },
     inactive_winbar = {
       lualine_c = { { 'filename', path = 1 } },
-    }
+    },
   },
 }

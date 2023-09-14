@@ -5,7 +5,7 @@ return {
     name = 'catppuccin',
     priority = 1000,
     init = function()
-      require("catppuccin").setup({
+      require('catppuccin').setup {
         color_overrides = {
           -- mocha = {
           --   base = '#000000',
@@ -24,13 +24,13 @@ return {
           which_key = true,
           ufo = true,
           navic = {
-            enabled = true
-          }
-        }
-      })
+            enabled = true,
+          },
+        },
+      }
 
-      vim.cmd('colorscheme catppuccin')
-    end
+      vim.cmd 'colorscheme catppuccin'
+    end,
   },
   {
     'stevearc/dressing.nvim',
@@ -42,8 +42,8 @@ return {
     },
   },
   {
-    "nmac427/guess-indent.nvim",
-    event = "BufReadPre",
-    opts = {}
+    'nmac427/guess-indent.nvim',
+    event = 'BufReadPre',
+    opts = {},
   },
 }

@@ -97,7 +97,7 @@ return {
       desc = '[S]earch [D]iagnostics',
     },
     {
-      '<leader>sr',
+      '<leader>sc',
       function()
         require('telescope.builtin').resume()
       end,

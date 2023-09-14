@@ -15,6 +15,7 @@ return {
       ['<leader>s'] = {
         name = '+Search',
         s = { '<cmd>Navbuddy<cr>', '[S]earch [S]ymbols' },
+        r = '[S]earch and [R]eplace',
       },
       ['<leader>g'] = {
         name = '+Git',
@@ -28,14 +29,14 @@ return {
         d = { '<cmd>bd<cr>', '[B]uffer [D]elete' },
       },
       ['<leader>x'] = {
-        name = '+Trouble'
+        name = '+Trouble',
       },
       ['<leader>m'] = {
-        name = "+Mini",
+        name = '+Mini',
         s = {
-          name = "Sessions"
-        }
-      }
+          name = 'Sessions',
+        },
+      },
     }
   end,
 }

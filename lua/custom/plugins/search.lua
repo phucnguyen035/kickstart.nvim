@@ -3,7 +3,6 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim' },
   cmd = 'Spectre',
   opts = {
-
     mapping = {
       ['enter_file'] = {
         map = 'o',
@@ -13,6 +12,6 @@ return {
     },
   },
   keys = {
-    { '<leader>sr', '<cmd>lua require("spectre").toggle()<cr>', '[S]earch and [R]eplace' },
+    { '<leader>sr', '<cmd>lua require("spectre").toggle()<cr>', { desc = '[S]earch and [R]eplace' } },
   },
 }
