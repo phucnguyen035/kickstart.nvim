@@ -81,7 +81,7 @@ return {
         typescriptreact = { 'prettierd' },
         css = { 'prettierd' },
         astro = { 'prettierd' },
-        python = { 'iosort', 'blackd' },
+        python = { 'isort', 'blackd' },
         go = { 'gofumpt', 'goimports', 'golines' },
         gohtmltmpl = { 'prettierd' },
         json = { 'jq', 'prettierd' },
