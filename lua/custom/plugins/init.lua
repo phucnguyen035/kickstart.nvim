@@ -7,10 +7,10 @@ return {
     cond = not vim.g.vscode,
     opts = {},
     keys = {
-      { '<leader>ha', "<cmd>:lua require('harpoon.mark').add_file()<cr>", desc = '[H]arpoon [A]dd' },
-      { '<leader>hm', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = '[H]arpoon [M]enu' },
-      { '<leader>hn', "<cmd>:lua require('harpoon.ui').nav_next()<cr>", desc = '[H]arpoon [N]ext' },
-      { '<leader>hp', "<cmd>:lua require('harpoon.ui').nav_prev()<cr>", desc = '[H]arpoon [P]revious' },
+      { 'gha', "<cmd>:lua require('harpoon.mark').add_file()<cr>", desc = '[H]arpoon [A]dd' },
+      { 'ghm', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = '[H]arpoon [M]enu' },
+      { 'ghn', "<cmd>:lua require('harpoon.ui').nav_next()<cr>", desc = '[H]arpoon [N]ext' },
+      { 'ghp', "<cmd>:lua require('harpoon.ui').nav_prev()<cr>", desc = '[H]arpoon [P]revious' },
     },
   },
   -- Linter
