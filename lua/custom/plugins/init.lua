@@ -131,12 +131,13 @@ return {
     cmd = 'ZenMode',
     opts = {
       window = {
+        backdrop = 1,
         width = 150,
       },
       plugins = {
         twilight = { enabled = true },
         tmux = { enabled = true },
-        wezterm = { enabled = true, font = 14 },
+        wezterm = { enabled = true, font = 15 },
       },
     },
     keys = {
