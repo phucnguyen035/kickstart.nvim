@@ -155,7 +155,7 @@ return {
             analyses = {
               fieldalignment = true,
               nilness = true,
-              unusedparams = true,
+              unusedparams = false,
               unusedwrite = true,
               useany = true,
             },
@@ -176,8 +176,8 @@ return {
           },
         },
         -- js stuff
-        html = { filetypes = { 'html', 'twig', 'hbs' } },
-        emmet_ls = { filetypes = { 'html', 'gohtmltmpl' } },
+        html = {},
+        emmet_ls = { filetypes = { 'html', 'gohtmltmpl', 'typescriptreact', 'javascriptreact', 'svelte', 'vue', 'astro' } },
         cssls = {},
         -- tsserver = {},
         prismals = {},
@@ -245,6 +245,8 @@ return {
     },
     opts = {
       lsp_document_formatting = false, -- Use conform for formatting
+      trouble = true,
+      luasnip = true,
     },
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
