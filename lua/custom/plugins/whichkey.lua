@@ -6,7 +6,7 @@ return {
     local wk = require 'which-key'
 
     wk.register {
-      ['gh'] = {
+      ['<leader>h'] = {
         name = '+Harpoon',
       },
       ['<leader>f'] = {
