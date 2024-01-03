@@ -50,7 +50,7 @@ if vim.g.vscode then
   map('n', '<leader>fe', [[<cmd>call VSCodeNotify('workbench.view.explorer')<cr>]])
   map('n', '<leader>/', [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
   map('n', '<leader>ss', [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
-  map('n', '<leader>gg', [[<cmd>call VSCodeNotify('workbench.view.scm')<cr>]])
+  map('n', '<leader>gg', [[<cmd>call VSCodeNotify('workbench.scm.focus')<cr>]])
   map('n', '<leader>pp', [[<cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>]])
   map('n', '<leader>ps', [[<cmd>call VSCodeNotify('workbench.action.toggleAuxiliaryBar')<cr>]])
 end

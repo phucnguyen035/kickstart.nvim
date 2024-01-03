@@ -1,10 +1,10 @@
-local section_name = "Actions"
+local section_name = 'Actions'
 local actions = {
-  { name = 'Find files',   action = 'Telescope find_files',    section = section_name },
-  { name = 'Recent files', action = "Telescope oldfiles",      section = section_name },
-  { name = 'Grep text',    action = 'Telescope live_grep',     section = section_name },
-  { name = 'Marks',        action = "Telescope harpoon marks", section = section_name },
-  { name = "Quit",         action = "qa",                      section = section_name },
+  { name = 'Find files', action = 'Telescope find_files', section = section_name },
+  { name = 'Recent files', action = 'Telescope oldfiles', section = section_name },
+  { name = 'Grep text', action = 'Telescope live_grep', section = section_name },
+  { name = 'Marks', action = 'Telescope harpoon marks', section = section_name },
+  { name = 'Quit', action = 'qa', section = section_name },
 }
 
 return {
@@ -77,7 +77,7 @@ return {
       {
         '<leader>fd',
         function()
-          local mf = require('mini.files')
+          local mf = require 'mini.files'
           local path = vim.api.nvim_buf_get_name(0)
           -- Get latest path if path ends with /Starter
           if path:sub(-8) == '/Starter' then
@@ -88,7 +88,7 @@ return {
           mf.open(path)
         end,
         desc = 'Open [F]iles in current [D]irectory',
-        silent = true
+        silent = true,
       },
       {
         '<leader>fr',
@@ -99,18 +99,27 @@ return {
       },
     },
   },
-  { 'echasnovski/mini.pairs',       version = false,   cond = not vim.g.vscode, event = 'InsertEnter', opts = {} },
-  { 'echasnovski/mini.indentscope', version = false,   event = "BufReadPre",    opts = {} },
-  { 'echasnovski/mini.bufremove',   version = false,   event = "BufRead",       opts = {} },
-  { 'echasnovski/mini.cursorword',  event = "BufRead", version = false,         opts = {} },
+  { 'echasnovski/mini.pairs', version = false, cond = not vim.g.vscode, event = 'InsertEnter', opts = {} },
+  { 'echasnovski/mini.indentscope', vond = not vim.g.vscode, version = false, event = 'BufReadPre', opts = {} },
+  { 'echasnovski/mini.bufremove', version = false, event = 'BufRead', opts = {} },
+  { 'echasnovski/mini.cursorword', cond = not vim.g.vscode, event = 'BufRead', version = false, opts = {} },
   {
     'echasnovski/mini.sessions',
+    cond = not vim.g.vscode,
     version = false,
     event = 'VimEnter',
-    opts = {},
+    opts = {
+      file = '', -- Disable local session
+    },
     keys = {
-      { '<leader>mss', function() require('mini.sessions').select() end, desc = '[S]elect [S]ession' }
-    }
+      {
+        '<leader>mss',
+        function()
+          require('mini.sessions').select()
+        end,
+        desc = '[S]elect [S]ession',
+      },
+    },
   },
   {
     'echasnovski/mini.surround',
@@ -118,12 +127,12 @@ return {
     event = { 'BufNewFile', 'BufRead' },
     opts = {
       mappings = {
-        add = 'gsa',            -- Add surrounding in Normal and Visual modes
-        delete = 'gsd',         -- Delete surrounding
-        find = 'gsf',           -- Find surrounding (to the right)
-        find_left = 'gsF',      -- Find surrounding (to the left)
-        highlight = 'gsh',      -- Highlight surrounding
-        replace = 'gsr',        -- Replace surrounding
+        add = 'gsa', -- Add surrounding in Normal and Visual modes
+        delete = 'gsd', -- Delete surrounding
+        find = 'gsf', -- Find surrounding (to the right)
+        find_left = 'gsF', -- Find surrounding (to the left)
+        highlight = 'gsh', -- Highlight surrounding
+        replace = 'gsr', -- Replace surrounding
         update_n_lines = 'gsn', -- Update `n_lines`
       },
     },

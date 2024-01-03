@@ -62,10 +62,8 @@ return {
         if client.server_capabilities.documentSymbolProvider then
           navbuddy.attach(client, bufnr)
           navic.attach(client, bufnr)
-        end -- NOTE: Remember that lua is a real programming language, and as such it is possible
-        -- to define small helper and utility functions so you don't have to repeat yourself
-        -- many times.
-        --
+        end
+
         -- In this case, we create a function that lets us more easily define mappings specific
         -- for LSP related items. It sets the mode, buffer and description for us each time.
         local nmap = function(keys, func, desc)
@@ -178,8 +176,15 @@ return {
         -- js stuff
         html = {},
         emmet_ls = { filetypes = { 'html', 'gohtmltmpl', 'typescriptreact', 'javascriptreact', 'svelte', 'vue', 'astro' } },
-        cssls = {},
-        -- tsserver = {},
+        cssls = {
+          css = {
+            validate = true,
+            lint = {
+              unknownAtRules = 'ignore',
+            },
+          },
+        },
+        tsserver = {},
         prismals = {},
         astro = {},
         svelte = {},
@@ -193,6 +198,11 @@ return {
 
       -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.workspace.didChangeWatchedFiles = {
+        dynamicRegistration = true,
+        relativePatternSupport = true,
+      }
+
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
       capabilities.textDocument.foldingRange = {
         dynamicRegistration = false,
@@ -220,7 +230,21 @@ return {
       -- Whenever an LSP attaches to a buffer, we will run this function.
       -- See `:help LspAttach` for more information about this autocmd event.
       vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function()
+        callback = function(args)
+          local client_id = args.data.client_id
+          local client = vim.lsp.get_client_by_id(client_id)
+
+          -- Only attach to clients that support document formatting
+          if not client.server_capabilities.documentFormattingProvider then
+            return
+          end
+
+          -- Tsserver usually works poorly. Sorry you work with bad languages
+          -- You can remove this line if you know what you're doing :)
+          if client.name == 'tsserver' then
+            return
+          end
+
           -- Big hack for svelte https://www.reddit.com/r/neovim/comments/1598ewp/neovim_svelte/
           vim.api.nvim_create_autocmd({ 'BufWrite' }, {
             pattern = { '+page.server.ts', '+page.ts', '+layout.server.ts', '+layout.ts' },
@@ -231,13 +255,8 @@ return {
     end,
   },
   {
-    'pmizio/typescript-tools.nvim',
-    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
-  },
-  {
     'ray-x/go.nvim',
+    cond = not vim.g.vscode,
     dependencies = {
       'ray-x/guihua.lua',
       'neovim/nvim-lspconfig',
@@ -253,6 +272,7 @@ return {
   },
   {
     'SmiteshP/nvim-navic',
+    cond = not vim.g.vscode,
     lazy = true,
     opts = {
       lsp = { auto_attach = true },
@@ -261,6 +281,7 @@ return {
   },
   {
     'SmiteshP/nvim-navbuddy',
+    cond = not vim.g.vscode,
     lazy = true,
     dependencies = {
       'SmiteshP/nvim-navic',

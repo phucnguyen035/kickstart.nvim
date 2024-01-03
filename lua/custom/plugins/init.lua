@@ -3,11 +3,11 @@
 return {
   {
     'ThePrimeagen/harpoon',
-    dependencies = 'nvim-lua/plenary.nvim',
     cond = not vim.g.vscode,
+    dependencies = 'nvim-lua/plenary.nvim',
     opts = {},
     keys = {
-      { '<leader>hm', "<cmd>:lua require('harpoon.mark').mark_file()<cr>", desc = '[H]arpoon [M]ark' },
+      { '<leader>hm', "<cmd>:lua require('harpoon.mark').add_file()<cr>", desc = '[H]arpoon [M]ark' },
       { '<leader>ho', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = '[H]arpoon [O]pen menu' },
       { '<leader>hn', "<cmd>:lua require('harpoon.ui').nav_next()<cr>", desc = '[H]arpoon [N]ext' },
       { '<leader>hp', "<cmd>:lua require('harpoon.ui').nav_prev()<cr>", desc = '[H]arpoon [P]revious' },
@@ -16,6 +16,7 @@ return {
   -- Linter
   {
     'mfussenegger/nvim-lint',
+    cond = not vim.g.vscode,
     event = 'BufRead',
     config = function()
       local lint = require 'lint'
@@ -36,8 +37,9 @@ return {
   -- Formatter
   {
     'stevearc/conform.nvim',
-    event = 'BufRead',
     cond = not vim.g.vscode,
+    event = { 'BufReadPre', 'BufNewFile' },
+    cmd = { 'ConformInfo' },
     config = function(_, opts)
       local conform = require 'conform'
       conform.setup(opts)
@@ -72,36 +74,56 @@ return {
         desc = 'Re-enable autoformat-on-save',
       })
     end,
-    opts = {
-      notify_on_error = false,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        javascript = { 'prettierd' },
-        javascriptreact = { 'prettierd' },
-        typescript = { { 'prettierd', 'prettier' } },
-        typescriptreact = { 'prettierd' },
-        css = { 'prettierd' },
-        astro = { 'prettierd' },
-        html = { 'prettierd' },
-        python = { 'isort', 'blackd' },
-        go = { 'gofumpt', 'goimports', 'golines' },
-        gohtmltmpl = { 'prettierd' },
-        json = { 'jq', 'prettierd' },
-      },
-      format_on_save = function(bufnr)
-        -- Disable with a global or buffer-local variable
-        if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-          return
-        end
+    opts = function()
+      local slow_format_filetypes = { 'typescriptreact' }
 
-        return { timeout_ms = 500, lsp_fallback = true }
-      end,
-      formatters = {
-        blackd = {
-          command = 'blackd-client',
+      return {
+        notify_on_error = false,
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          javascript = { 'prettierd' },
+          javascriptreact = { 'prettierd' },
+          typescript = { 'prettierd' },
+          typescriptreact = { 'prettierd' },
+          css = { 'prettierd' },
+          astro = { 'prettierd' },
+          html = { 'prettierd' },
+          python = { 'isort', 'blackd' },
+          go = { 'gofumpt', 'goimports', 'golines' },
+          gohtmltmpl = { 'prettierd' },
+          json = { 'jq', 'prettierd' },
         },
-      },
-    },
+        format_on_save = function(bufnr)
+          if slow_format_filetypes[vim.bo[bufnr].filetype] then
+            return
+          end
+
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+
+          local function on_format(err)
+            if err and err:match 'timeout$' then
+              slow_format_filetypes[vim.bo[bufnr].filetype] = true
+            end
+          end
+
+          return { timeout_ms = 500, lsp_fallback = true }, on_format
+        end,
+        format_after_save = function(bufnr)
+          if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+            return
+          end
+          return { lsp_fallback = true }
+        end,
+        formatters = {
+          blackd = {
+            command = 'blackd-client',
+          },
+        },
+      }
+    end,
   },
   -- Diagnostics
   {
@@ -119,17 +141,17 @@ return {
     },
   },
   -- Free alternative to Copilot
-  {
-    'Exafunction/codeium.vim',
-    cond = not vim.g.vscode,
-    event = 'BufEnter',
-    cmd = 'Codeium',
-  },
+  -- {
+  --   'Exafunction/codeium.vim',
+  --   cond = not vim.g.vscode,
+  --   event = 'BufEnter',
+  --   cmd = 'Codeium',
+  -- },
   -- Zen Mode
   {
     'folke/zen-mode.nvim',
-    dependencies = { 'folke/twilight.nvim' },
     cond = not vim.g.vscode,
+    dependencies = { 'folke/twilight.nvim' },
     cmd = 'ZenMode',
     opts = {
       window = {
@@ -147,49 +169,16 @@ return {
     },
   },
   {
-    'rgroli/other.nvim',
-    cond = not vim.g.vscode,
-    cmd = { 'Other', 'OtherClear', 'OtherSplit', 'OtherVSplit' },
-    keys = {
-      { '<leader><TAB>', '<cmd>Other<CR>', desc = 'Other', silent = true },
+    'nvim-tree/nvim-web-devicons',
+    lazy = true,
+    opts = {
+      override = {
+        postcss = {
+          icon = '',
+          color = '#5293CB',
+          name = 'PostCSS',
+        },
+      },
     },
-    config = function()
-      local sveltekit_target = {
-        { target = 'src/routes%1/%+layout.svelte', context = 'layout-view' },
-        { target = 'src/routes%1/%+layout.ts', context = 'layout-load' },
-        { target = 'src/routes%1/%+layout.server.ts', context = 'layout-load-server' },
-        { target = 'src/routes%1/%+page.svelte', context = 'page-view' },
-        { target = 'src/routes%1/%+page.ts', context = 'page-load' },
-        { target = 'src/routes%1/%+page.server.ts', context = 'page-load-server' },
-        { target = 'src/routes%1/%+error.svelte', context = 'error' },
-      }
-
-      local nextjs_target = {
-        { target = 'app%1/page.tsx', context = 'page' },
-        { target = 'app%1/loading.tsx', context = 'loading' },
-        { target = 'app%1/error.tsx', context = 'error' },
-        { target = 'app%1/layout.tsx', context = 'layout' },
-        { target = 'app%1/route.ts', context = 'route' },
-      }
-      require('other-nvim').setup {
-        rememberBuffers = false,
-        mappings = {
-          -- builtin mappings
-          'golang',
-          -- sveltekit
-          { pattern = 'src/routes(.*)/%+(.*).ts$', target = sveltekit_target },
-          { pattern = 'src/routes(.*)/+(.*)%.svelte$', target = sveltekit_target },
-          -- nextjs app router
-          { pattern = 'app(.*)/page.tsx', target = nextjs_target },
-          { pattern = 'app(.*)/loading.tsx', target = nextjs_target },
-          { pattern = 'app(.*)/error.tsx', target = nextjs_target },
-          { pattern = 'app(.*)/layout.tsx', target = nextjs_target },
-          { pattern = 'app(.*)/route.ts', target = nextjs_target },
-        },
-        style = {
-          width = 0.9,
-        },
-      }
-    end,
   },
 }
