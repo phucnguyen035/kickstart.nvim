@@ -49,21 +49,28 @@ return {
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+
+      -- A simple popup display that provides breadcrumbs like navigation feature but in keyboard centric manner inspired by ranger file manager.
+      {
+        'SmiteshP/nvim-navbuddy',
+        cond = not vim.g.vscode,
+        dependencies = {
+          'SmiteshP/nvim-navic',
+          'MunifTanjim/nui.nvim',
+        },
+        opts = {
+          lsp = { auto_attach = true },
+          highlight = true,
+        },
+      },
     },
     config = function()
       require('lspconfig.ui.windows').default_options = {
         border = 'single',
       }
-      local navbuddy = require 'nvim-navbuddy'
-      local navic = require 'nvim-navic'
       -- [[ Configure LSP ]]
       --  This function gets run when an LSP connects to a particular buffer.
       local on_attach = function(client, bufnr)
-        if client.server_capabilities.documentSymbolProvider then
-          navbuddy.attach(client, bufnr)
-          navic.attach(client, bufnr)
-        end
-
         -- In this case, we create a function that lets us more easily define mappings specific
         -- for LSP related items. It sets the mode, buffer and description for us each time.
         local nmap = function(keys, func, desc)
@@ -269,29 +276,5 @@ return {
     },
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
-  },
-  {
-    'SmiteshP/nvim-navic',
-    cond = not vim.g.vscode,
-    lazy = true,
-    opts = {
-      lsp = { auto_attach = true },
-      highlight = true,
-    },
-  },
-  {
-    'SmiteshP/nvim-navbuddy',
-    cond = not vim.g.vscode,
-    lazy = true,
-    dependencies = {
-      'SmiteshP/nvim-navic',
-      'MunifTanjim/nui.nvim',
-      'numToStr/Comment.nvim',
-      'nvim-telescope/telescope.nvim',
-    },
-    opts = {
-      lsp = { auto_attach = true },
-      highlight = true,
-    },
   },
 }
