@@ -39,7 +39,6 @@ local mode_map = {
 return {
   -- Set lualine as statusline
   'nvim-lualine/lualine.nvim',
-  cond = not vim.g.vscode,
   event = 'BufRead',
   dependencies = 'nvim-tree/nvim-web-devicons',
   -- See `:help lualine.txt`
@@ -60,28 +59,9 @@ return {
           return mode_map[vim.api.nvim_get_mode().mode] or '__'
         end,
       },
-      lualine_b = {
-        'branch',
-        'diff',
-      },
-      lualine_c = {
-        {
-          'diagnostics',
-          symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
-        },
-      },
       lualine_x = {
         { 'filetype' },
       },
-    },
-    winbar = {
-      lualine_c = {
-        { 'filename', path = 1 },
-        { 'navic' },
-      },
-    },
-    inactive_winbar = {
-      lualine_c = { { 'filename', path = 1 } },
     },
   },
 }
