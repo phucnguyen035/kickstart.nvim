@@ -44,6 +44,7 @@ map('n', 'n', 'nzzzv', { desc = 'Keep cursor centered when moving to next search
 map('n', 'N', 'Nzzzv', { desc = 'Keep cursor centered when moving to previous search result' })
 map('n', '<M-o>', '@="m`o<C-V><Esc>``"<CR>', { desc = 'Insert newline below', silent = true })
 map('n', '<M-O>', '@="m`O<C-V><Esc>``"<CR>', { desc = 'Insert newline above', silent = true })
+map('x', 'zV', 'zMzO', { desc = 'Close all except current cursor line', silent = true })
 
 if vim.g.vscode then
   map('n', '<leader><space>', '<cmd>Find<cr>')
@@ -53,4 +54,12 @@ if vim.g.vscode then
   map('n', '<leader>gg', [[<cmd>call VSCodeNotify('workbench.scm.focus')<cr>]])
   map('n', '<leader>pp', [[<cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<cr>]])
   map('n', '<leader>ps', [[<cmd>call VSCodeNotify('workbench.action.toggleAuxiliaryBar')<cr>]])
+  map('n', 'za', [[<cmd>call VSCodeNotify('editor.toggleFold')<cr>]])
+  map('n', 'zR', [[<cmd>call VSCodeNotify('editor.unfoldAll')<cr>]])
+  map('n', 'zM', [[<cmd>call VSCodeNotify('editor.foldAll')<cr>]])
+  map('n', 'zo', [[<cmd>call VSCodeNotify('editor.unfold')<cr>]])
+  map('n', 'zO', [[<cmd>call VSCodeNotify('editor.unfoldRecursively')<cr>]])
+  map('n', 'zc', [[<cmd>call VSCodeNotify('editor.fold')<cr>]])
+  map('n', 'zC', [[<cmd>call VSCodeNotify('editor.foldRecursively')<cr>]])
+  map('v', 'zV', [[<cmd>call VSCodeNotify('editor.foldAllExcept')<cr>]])
 end
