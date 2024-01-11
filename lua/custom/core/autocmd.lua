@@ -6,20 +6,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-local remember_fold = vim.api.nvim_create_augroup('RemeberFold', { clear = true })
-vim.api.nvim_create_autocmd({ 'BufWinLeave', 'BufWritePre' }, {
-  pattern = '*.*',
-  command = 'mkview',
-  group = remember_fold,
-})
-vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufWritePost' }, {
-  pattern = '*.*',
-  callback = function()
-    vim.cmd 'silent! loadview'
-  end,
-  group = remember_fold,
-})
-
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
