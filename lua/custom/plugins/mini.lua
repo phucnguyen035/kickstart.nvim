@@ -100,7 +100,7 @@ return {
     },
   },
   { 'echasnovski/mini.pairs', version = false, cond = not vim.g.vscode, event = 'InsertEnter', opts = {} },
-  { 'echasnovski/mini.indentscope', vond = not vim.g.vscode, version = false, event = 'BufReadPre', opts = {} },
+  -- { 'echasnovski/mini.indentscope', cond = not vim.g.vscode, version = false, event = 'BufReadPre', opts = {} },
   { 'echasnovski/mini.bufremove', version = false, event = 'BufRead', opts = {} },
   { 'echasnovski/mini.cursorword', cond = not vim.g.vscode, event = 'BufRead', version = false, opts = {} },
   {

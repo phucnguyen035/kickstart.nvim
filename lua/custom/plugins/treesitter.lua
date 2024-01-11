@@ -6,9 +6,13 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'JoosepAlviste/nvim-ts-context-commentstring',
+      'lukas-reineke/indent-blankline.nvim',
     },
     build = ':TSUpdate',
     config = function()
+      local ibl = require 'ibl'
+      ibl.setup()
+
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
       require('nvim-treesitter.configs').setup {
