@@ -37,31 +37,35 @@ local mode_map = {
 }
 
 return {
-  -- Set lualine as statusline
-  'nvim-lualine/lualine.nvim',
-  event = 'BufRead',
-  dependencies = 'nvim-tree/nvim-web-devicons',
-  -- See `:help lualine.txt`
-  opts = {
-    options = {
-      theme = 'auto',
-      component_separators = '|',
-      section_separators = '',
-      disabled_filetypes = { 'dashboard', 'alpha', 'starter' },
-    },
-    extensions = {
-      'quickfix',
-      'lazy',
-    },
-    sections = {
-      lualine_a = {
-        function()
-          return mode_map[vim.api.nvim_get_mode().mode] or '__'
-        end,
+  {
+    -- Set lualine as statusline
+    'nvim-lualine/lualine.nvim',
+    event = 'BufRead',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    -- See `:help lualine.txt`
+    opts = {
+      options = {
+        theme = 'auto',
+        component_separators = '|',
+        section_separators = '',
+        disabled_filetypes = { 'dashboard', 'alpha', 'starter' },
       },
-      lualine_x = {
-        { 'filetype' },
+      extensions = {
+        'quickfix',
+        'lazy',
+      },
+      sections = {
+        lualine_a = {
+          function()
+            return mode_map[vim.api.nvim_get_mode().mode] or '__'
+          end,
+        },
+        lualine_x = { 'copilot', 'encoding', 'filetype' },
       },
     },
+  },
+  {
+    'AndreM222/copilot-lualine',
+    lazy = true,
   },
 }
