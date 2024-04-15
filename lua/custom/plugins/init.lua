@@ -40,8 +40,8 @@ return {
   {
     'stevearc/conform.nvim',
     cond = not vim.g.vscode,
-    event = { 'BufReadPre', 'BufNewFile' },
-    cmd = { 'ConformInfo' },
+    event = { 'BufWritePre' },
+    cmd = { 'ConformInfo', 'Format', 'FormatToggle', 'FormatStatus' },
     config = function(_, opts)
       local conform = require 'conform'
       conform.setup(opts)
@@ -58,26 +58,38 @@ return {
         conform.format { async = true, lsp_fallback = true, range = range }
       end, { range = true })
 
-      vim.api.nvim_create_user_command('FormatDisable', function(args)
+      vim.api.nvim_create_user_command('FormatToggle', function(args)
         if args.bang then
-          -- FormatDisable! will disable formatting just for this buffer
-          vim.b.disable_autoformat = true
+          local current = vim.b.disable_autoformat
+          local next = not current
+          -- FormatToggle! will disable formatting just for this buffer
+          vim.b.disable_autoformat = next
+          print('Autoformat ' .. (next and 'disabled' or 'enabled') .. ' for this buffer')
         else
-          vim.g.disable_autoformat = true
+          local current = vim.g.disable_autoformat
+          local next = not current
+          vim.g.disable_autoformat = next
+          print('Autoformat ' .. (next and 'disabled' or 'enabled') .. ' globally')
         end
       end, {
-        desc = 'Disable autoformat-on-save',
+        desc = 'Toggle autoformat-on-save',
         bang = true,
       })
-      vim.api.nvim_create_user_command('FormatEnable', function()
-        vim.b.disable_autoformat = false
-        vim.g.disable_autoformat = false
+
+      vim.api.nvim_create_user_command('FormatStatus', function()
+        if vim.b.disable_autoformat == true then
+          print 'Autoformat is disabled for this buffer'
+        elseif vim.g.disable_autoformat == true then
+          print 'Autoformat is disabled globally'
+        else
+          print 'Autoformat is enabled'
+        end
       end, {
-        desc = 'Re-enable autoformat-on-save',
+        desc = 'Show autoformat status',
       })
     end,
     opts = function()
-      local slow_format_filetypes = { 'typescriptreact' }
+      local slow_format_filetypes = {}
 
       return {
         notify_on_error = false,
