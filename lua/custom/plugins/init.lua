@@ -25,11 +25,15 @@ return {
         go = { 'golangcilint' },
       }
 
-      vim.api.nvim_create_autocmd('BufWritePost', {
+      vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
         callback = function()
           lint.try_lint()
         end,
       })
+
+      vim.keymap.set('n', '<leader>cl', function()
+        lint.try_lint()
+      end, { desc = 'Trigger [C]ode [L]inting for current file' })
     end,
   },
   -- Formatter
