@@ -1,5 +1,3 @@
----@diagnostic disable: inject-field
-
 return {
   {
     'ThePrimeagen/harpoon',
@@ -147,6 +145,26 @@ return {
   --   event = 'BufEnter',
   --   cmd = 'Codeium',
   -- },
+  {
+    'zbirenbaum/copilot.lua',
+    cond = not vim.g.vscode,
+    cmd = 'Copilot',
+    event = 'InsertEnter',
+    opts = {
+      suggestion = {
+        auto_trigger = true,
+      },
+    },
+  },
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    branch = 'canary',
+    dependencies = {
+      { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+    },
+    opts = {},
+  },
   -- Zen Mode
   {
     'folke/zen-mode.nvim',

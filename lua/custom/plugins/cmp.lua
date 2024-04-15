@@ -69,7 +69,7 @@ return {
             mode = 'symbol_text',
             maxwidth = 50,
             ellipsis_char = '...',
-            -- symbol_map = { Copilot = '' },
+            symbol_map = { Copilot = '' },
           },
         },
 
