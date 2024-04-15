@@ -196,7 +196,15 @@ return {
         astro = {},
         svelte = {},
         volar = {},
-        tailwindcss = {},
+        tailwindcss = {
+          tailwindCSS = {
+            experimental = {
+              classRegex = {
+                { 'tv\\((([^()]*|\\([^()]*\\))*)\\)', '["\'`]([^"\'`]*).*?["\'`]' },
+              },
+            },
+          },
+        },
         eslint = {},
       }
 
