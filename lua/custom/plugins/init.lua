@@ -86,7 +86,7 @@ return {
           css = { 'prettierd' },
           astro = { 'prettierd' },
           html = { 'prettierd' },
-          python = { 'isort', 'blackd' },
+          python = { 'ruff_format' },
           go = { 'gofumpt', 'goimports', 'golines' },
           gohtmltmpl = { 'prettierd' },
           json = { 'jq', 'prettierd' },
@@ -109,17 +109,6 @@ return {
 
           return { timeout_ms = 500, lsp_fallback = true }, on_format
         end,
-        format_after_save = function(bufnr)
-          if not slow_format_filetypes[vim.bo[bufnr].filetype] then
-            return
-          end
-          return { lsp_fallback = true }
-        end,
-        formatters = {
-          blackd = {
-            command = 'blackd-client',
-          },
-        },
       }
     end,
   },
