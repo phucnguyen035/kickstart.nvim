@@ -30,6 +30,9 @@ return {
           'vue',
           'vimdoc',
           'vim',
+          -- Elixir stuff
+          'elixir',
+          'heex',
         },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
