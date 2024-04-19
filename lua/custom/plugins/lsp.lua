@@ -172,7 +172,6 @@ return {
             ['build.templateExtensions'] = { 'gohtml', 'html', 'gotmpl', 'tmpl' },
           },
         },
-        -- pyright = {},
         rust_analyzer = {},
         lua_ls = {
           Lua = {
@@ -192,7 +191,6 @@ return {
           },
         },
         tsserver = {},
-        prismals = {},
         astro = {},
         svelte = {},
         volar = {},
@@ -206,6 +204,9 @@ return {
           },
         },
         eslint = {},
+        -- Python
+        ruff_lsp = {},
+        pyright = {},
       }
 
       -- Setup neovim lua configuration
