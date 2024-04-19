@@ -21,7 +21,6 @@ return {
 
       lint.linters_by_ft = {
         yaml = { 'actionlint' },
-        python = { 'ruff' },
         go = { 'golangcilint' },
       }
 
@@ -102,7 +101,6 @@ return {
           css = { 'prettierd' },
           astro = { 'prettierd' },
           html = { 'prettierd' },
-          python = { 'ruff_format' },
           go = { 'gofumpt', 'goimports', 'golines' },
           gohtmltmpl = { 'prettierd' },
           json = { 'jq', 'prettierd' },
