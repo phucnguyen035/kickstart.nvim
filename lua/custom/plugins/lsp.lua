@@ -206,7 +206,16 @@ return {
         eslint = {},
         -- Python
         ruff_lsp = {},
-        pyright = {},
+        pyright = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'standard',
+              autoSearchPaths = true,
+              diagnosticMode = 'openFilesOnly',
+              useLibraryCodeForTypes = true,
+            },
+          },
+        },
       }
 
       -- Setup neovim lua configuration
