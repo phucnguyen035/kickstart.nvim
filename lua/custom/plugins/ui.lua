@@ -36,11 +36,7 @@ return {
     'stevearc/dressing.nvim',
     cond = not vim.g.vscode,
     event = 'VeryLazy',
-    opts = {
-      select = {
-        telescope = require('telescope.themes').get_cursor(),
-      },
-    },
+    opts = {},
   },
   {
     'nmac427/guess-indent.nvim',
