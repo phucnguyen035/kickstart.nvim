@@ -45,6 +45,8 @@ map('n', 'N', 'Nzzzv', { desc = 'Keep cursor centered when moving to previous se
 map('n', '<M-o>', '@="m`o<C-V><Esc>``"<CR>', { desc = 'Insert newline below', silent = true })
 map('n', '<M-O>', '@="m`O<C-V><Esc>``"<CR>', { desc = 'Insert newline above', silent = true })
 map('x', 'zV', 'zMzO', { desc = 'Close all except current cursor line', silent = true })
+map('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Go to previous tab' })
+map('n', ']t', '<cmd>tabnext<cr>', { desc = 'Go to next tab' })
 
 if vim.g.vscode then
   map('n', '<leader><space>', '<cmd>Find<cr>')
