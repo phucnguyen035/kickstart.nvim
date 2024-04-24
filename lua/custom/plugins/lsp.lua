@@ -181,7 +181,7 @@ return {
         },
         -- js stuff
         html = {},
-        emmet_ls = { filetypes = { 'html', 'gohtmltmpl', 'typescriptreact', 'javascriptreact', 'svelte', 'vue', 'astro' } },
+        emmet_language_server = {},
         cssls = {
           css = {
             validate = true,
