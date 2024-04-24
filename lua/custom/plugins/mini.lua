@@ -101,7 +101,21 @@ return {
   },
   { 'echasnovski/mini.pairs', version = false, cond = not vim.g.vscode, event = 'InsertEnter', opts = {} },
   -- { 'echasnovski/mini.indentscope', cond = not vim.g.vscode, version = false, event = 'BufReadPre', opts = {} },
-  { 'echasnovski/mini.bufremove', version = false, event = 'BufRead', opts = {} },
+  {
+    'echasnovski/mini.bufremove',
+    version = false,
+    event = 'BufRead',
+    opts = {},
+    keys = {
+      {
+        '<leader>bd',
+        function()
+          require('mini.bufremove').unshow_in_window()
+        end,
+        desc = '[B]uffer [D]elete',
+      },
+    },
+  },
   { 'echasnovski/mini.cursorword', cond = not vim.g.vscode, event = 'BufRead', version = false, opts = {} },
   {
     'echasnovski/mini.sessions',

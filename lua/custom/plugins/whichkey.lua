@@ -25,9 +25,7 @@ return {
       },
       ['<leader>b'] = {
         name = '+Buffer',
-        l = { '<cmd>b#<cr>', '[B]uffer [L]ast' },
-        d = { '<cmd>bd<cr>', '[B]uffer [D]elete' },
-        c = { '<cmd>WipeWindowlessBufs<cr>', '[B]uffer [C]lose All But Current', { silent = true } },
+        c = { '<cmd>WipeWindowlessBufs<cr>', '[B]uffer [C]ear All But Current', { silent = true } },
       },
       ['<leader>x'] = {
         name = '+Trouble',
