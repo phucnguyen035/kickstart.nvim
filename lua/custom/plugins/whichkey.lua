@@ -36,6 +36,11 @@ return {
           name = 'Sessions',
         },
       },
+      ['<leader>t'] = {
+        name = '+Tab',
+        f = { '<cmd>tabfirst<cr>', '[T]ab [F]irst' },
+        l = { '<cmd>tablast<cr>', '[T]ab [L]ast' },
+      },
     }
   end,
 }
