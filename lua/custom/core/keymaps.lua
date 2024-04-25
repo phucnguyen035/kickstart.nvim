@@ -27,8 +27,8 @@ map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
 -- Diagnostic keymaps
-map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-map('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic message' })
+map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic message' })
 map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 
 map('i', 'jk', '<ESC>', { desc = 'Exit insert mode', nowait = true })
@@ -45,8 +45,8 @@ map('n', 'N', 'Nzzzv', { desc = 'Keep cursor centered when moving to previous se
 map('n', '<M-o>', '@="m`o<C-V><Esc>``"<CR>', { desc = 'Insert newline below', silent = true })
 map('n', '<M-O>', '@="m`O<C-V><Esc>``"<CR>', { desc = 'Insert newline above', silent = true })
 map('x', 'zV', 'zMzO', { desc = 'Close all except current cursor line', silent = true })
-map('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Go to previous tab' })
-map('n', ']t', '<cmd>tabnext<cr>', { desc = 'Go to next tab' })
+map('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
+map('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
 if vim.g.vscode then
   map('n', '<leader><space>', '<cmd>Find<cr>')
