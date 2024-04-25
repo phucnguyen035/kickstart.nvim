@@ -331,26 +331,4 @@ return {
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
   },
-  -- A simple popup display that provides breadcrumbs like navigation feature but in keyboard centric manner inspired by ranger file manager.
-  {
-    'SmiteshP/nvim-navbuddy',
-    cond = not vim.g.vscode,
-    dependencies = {
-      'SmiteshP/nvim-navic',
-      'MunifTanjim/nui.nvim',
-    },
-    opts = {
-      lsp = { auto_attach = true },
-      highlight = true,
-    },
-    keys = {
-      {
-        '<leader>ss',
-        '<cmd>Navbuddy<cr>',
-        noremap = true,
-        silent = true,
-        desc = 'Search Symbols',
-      },
-    },
-  },
 }
