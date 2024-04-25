@@ -38,8 +38,11 @@ return {
       },
       ['<leader>t'] = {
         name = '+Tab',
-        f = { '<cmd>tabfirst<cr>', '[T]ab [F]irst' },
-        l = { '<cmd>tablast<cr>', '[T]ab [L]ast' },
+        h = { '<cmd>tabnext<cr>', 'Go to next tab' },
+        l = { '<cmd>tabprevious<cr>', 'Go to previous tab' },
+        g = { '<cmd>tabfirst<cr>', 'Go to first tab' },
+        G = { '<cmd>tablast<cr>', 'Go to last tab' },
+        n = { '<cmd>tabnew<cr>', 'New tab' },
       },
     }
   end,
