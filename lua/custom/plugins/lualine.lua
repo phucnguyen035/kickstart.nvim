@@ -40,7 +40,7 @@ return {
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
-    event = 'BufRead',
+    lazy = false,
     dependencies = 'nvim-tree/nvim-web-devicons',
     -- See `:help lualine.txt`
     opts = {
