@@ -93,8 +93,12 @@ return {
 
         if client.name == 'eslint' then
           vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'EslintFixAll',
+            callback = function(event)
+              local diag = vim.diagnostic.get(event.buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+              if #diag > 0 then
+                vim.cmd 'EslintFixAll'
+              end
+            end,
           })
         end
 
