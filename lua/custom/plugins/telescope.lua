@@ -61,63 +61,71 @@ return {
       function()
         require('telescope.builtin').buffers()
       end,
-      desc = 'Find existing buffers',
+      desc = 'Find buffers',
     },
     {
       '<leader>ff',
       function()
-        require('telescope.builtin').find_files()
+        local function is_git_repo()
+          vim.fn.system 'git rev-parse --is-inside-work-tree'
+          return vim.v.shell_error == 0
+        end
+        local function get_git_root()
+          local dot_git_path = vim.fn.finddir('.git', '.;')
+          return vim.fn.fnamemodify(dot_git_path, ':h')
+        end
+        local opts = {}
+        if is_git_repo() then
+          opts = {
+            cwd = get_git_root(),
+          }
+        end
+
+        require('telescope.builtin').find_files(opts)
       end,
-      desc = '[F]ind [F]iles',
+      desc = 'Find files from project root',
     },
     {
       '<leader>fg',
       function()
         require('telescope.builtin').git_files()
       end,
-      desc = '[F]ind [G]it files',
+      desc = 'Find Git files',
     },
     {
       '<leader>sh',
       function()
         require('telescope.builtin').help_tags()
       end,
-      desc = '[S]earch [H]elp',
+      desc = 'Search help',
     },
     {
       '<leader>sg',
       function()
         require('telescope.builtin').live_grep()
       end,
-      desc = '[S]earch by [G]rep',
+      desc = 'Search grep',
     },
     {
       '<leader>sw',
       function()
         require('telescope.builtin').grep_string()
       end,
-      desc = '[S]earch current [W]ord',
-    },
-    {
-      '<leader>sd',
-      function()
-        require('telescope.builtin').diagnostics()
-      end,
-      desc = '[S]earch [D]iagnostics',
+      desc = 'Search current word',
     },
     {
       '<leader>sc',
       function()
         require('telescope.builtin').resume()
       end,
-      desc = '[S]earch [C]ontinue',
+      desc = 'Continue search',
     },
     {
       '<leader>sb',
       function()
         require('telescope.builtin').current_buffer_fuzzy_find { skip_empty_lines = true, previewer = false }
       end,
-      desc = '[S]earch [B]uffer',
+      desc = 'Fuzzy search current buffer',
     },
   },
 }
