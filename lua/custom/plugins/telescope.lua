@@ -90,7 +90,7 @@ return {
       function()
         require('telescope.builtin').git_files()
       end,
-      desc = 'Find Git files',
+      desc = 'Find git files',
     },
     {
       '<leader>sh',

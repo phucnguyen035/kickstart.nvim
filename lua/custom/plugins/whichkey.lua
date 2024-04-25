@@ -7,34 +7,27 @@ return {
 
     wk.register {
       ['<leader>h'] = {
-        name = '+Harpoon',
+        name = '+harpoon',
       },
       ['<leader>f'] = {
-        name = '+File',
+        name = '+file',
       },
       ['<leader>s'] = {
-        name = '+Search',
-        r = '[S]earch and [R]eplace',
+        name = '+search',
       },
       ['<leader>g'] = {
-        name = '+Git',
+        name = '+git',
       },
       ['<leader>b'] = {
-        name = '+Buffer',
+        name = '+buffer',
         b = { '<cmd>b#<cr>', 'Switch to last buffer' },
         c = { '<cmd>WipeWindowlessBufs<cr>', 'Clear all buffers, keep current', { silent = true } },
       },
       ['<leader>x'] = {
-        name = '+Trouble',
-      },
-      ['<leader>m'] = {
-        name = '+Mini',
-        s = {
-          name = 'Sessions',
-        },
+        name = '+trouble',
       },
       ['<leader>t'] = {
-        name = '+Tab',
+        name = '+tab',
         h = { '<cmd>tabnext<cr>', 'Go to next tab' },
         l = { '<cmd>tabprevious<cr>', 'Go to previous tab' },
         g = { '<cmd>tabfirst<cr>', 'Go to first tab' },

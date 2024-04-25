@@ -67,7 +67,6 @@ return {
         pattern = 'MiniFilesBufferCreate',
         callback = function(args)
           local buf_id = args.data.buf_id
-          -- Tweak keys to your liking
           map_split(buf_id, 'gs', 'belowright horizontal')
           map_split(buf_id, 'gv', 'belowright vertical')
         end,
@@ -83,11 +82,10 @@ return {
           if path:sub(-8) == '/Starter' then
             path = mf.get_latest_path()
           end
-          print(path)
 
           mf.open(path)
         end,
-        desc = 'Open [F]iles in current [D]irectory',
+        desc = 'Open files in directory',
         silent = true,
       },
       {
@@ -95,7 +93,7 @@ return {
         function()
           require('mini.files').open(nil, false)
         end,
-        desc = 'Open [F]iles in [R]oot diretory (cwd)',
+        desc = 'Open files in root directory',
       },
     },
   },
@@ -112,7 +110,7 @@ return {
         function()
           require('mini.bufremove').unshow_in_window()
         end,
-        desc = '[B]uffer [D]elete',
+        desc = 'Delete buffer',
       },
     },
   },

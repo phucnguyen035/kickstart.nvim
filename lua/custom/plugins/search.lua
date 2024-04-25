@@ -12,6 +12,6 @@ return {
     },
   },
   keys = {
-    { '<leader>sr', '<cmd>lua require("spectre").toggle()<cr>', { desc = '[S]earch and [R]eplace' } },
+    { '<leader>sr', '<cmd>lua require("spectre").toggle()<cr>', { desc = 'Search and replace' } },
   },
 }
