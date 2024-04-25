@@ -68,13 +68,16 @@ return {
         nmap('<leader>cr', vim.lsp.buf.rename, 'Rename symbol')
         nmap('<leader>ca', vim.lsp.buf.code_action, 'Code action')
         vim.keymap.set('v', '<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr, desc = '[C]ode [A]ction' })
+        nmap('gr', function()
+          require('telescope.builtin').lsp_references { include_declaration = false }
+        end, 'find references')
+        nmap('<leader>ss', function()
+          require('telescope.builtin').lsp_document_symbols {}
+        end, 'Search document symbols')
 
         nmap('gd', function()
           vim.lsp.buf.definition { on_list = on_list }
         end, 'go to definition')
-        nmap('gr', function()
-          require('telescope.builtin').lsp_references { include_declaration = false }
-        end, 'find references')
         nmap('gI', vim.lsp.buf.implementation, 'go to implementation')
         nmap('gt', vim.lsp.buf.type_definition, 'go to type definition')
 
@@ -176,7 +179,46 @@ return {
             },
           },
         },
-        tsserver = {},
+        tsserver = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = false,
+              includeInlayVariableTypeHints = false,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = false,
+              includeInlayFunctionLikeReturnTypeHints = false,
+              includeInlayEnumMemberValueHints = true,
+            },
+            implementationsCodeLens = {
+              enabled = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              showOnAllFunctions = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = false,
+              includeInlayVariableTypeHints = false,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayPropertyDeclarationTypeHints = false,
+              includeInlayFunctionLikeReturnTypeHints = false,
+              includeInlayEnumMemberValueHints = true,
+            },
+            implementationsCodeLens = {
+              enabled = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              showOnAllFunctions = true,
+            },
+          },
+        },
         astro = {},
         svelte = {},
         volar = {},
@@ -189,7 +231,15 @@ return {
             },
           },
         },
-        eslint = {},
+        eslint = {
+          format = false,
+          codeActionOnSave = {
+            enable = true,
+            mode = 'problems',
+          },
+          -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+          workingDirectories = { mode = 'auto' },
+        },
         -- Python
         ruff_lsp = {},
         pyright = {
