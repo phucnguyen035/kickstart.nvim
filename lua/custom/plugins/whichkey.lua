@@ -20,12 +20,10 @@ return {
       ['<leader>g'] = {
         name = '+Git',
       },
-      ['<leader>d'] = {
-        name = '+Debug',
-      },
       ['<leader>b'] = {
         name = '+Buffer',
-        c = { '<cmd>WipeWindowlessBufs<cr>', '[B]uffer [C]ear All But Current', { silent = true } },
+        b = { '<cmd>b#<cr>', 'Switch to last buffer' },
+        c = { '<cmd>WipeWindowlessBufs<cr>', 'Clear all buffers, keep current', { silent = true } },
       },
       ['<leader>x'] = {
         name = '+Trouble',
