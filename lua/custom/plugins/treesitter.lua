@@ -96,19 +96,19 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               [']m'] = { query = '@function.outer', desc = 'Next function start' },
-              [']c'] = { query = '@class.outer', desc = 'Next class start' },
+              [']]'] = { query = '@class.outer', desc = 'Next class start' },
             },
             goto_next_end = {
               [']M'] = { query = '@function.outer', desc = 'Next function end' },
-              [']C'] = { query = '@class.outer', desc = 'Next class end' },
+              [']['] = { query = '@class.outer', desc = 'Next class end' },
             },
             goto_previous_start = {
               ['[m'] = { query = '@function.outer', desc = 'Previous function start' },
-              ['[c'] = { query = '@class.outer', desc = 'Previous class start' },
+              ['[['] = { query = '@class.outer', desc = 'Previous class start' },
             },
             goto_previous_end = {
               ['[M'] = { query = '@function.outer', desc = 'Previous function end' },
-              ['[C'] = { query = '@class.outer', desc = 'Previous class end' },
+              ['[]'] = { query = '@class.outer', desc = 'Previous class end' },
             },
           },
           lsp_interop = {
@@ -130,17 +130,17 @@ return {
     'nvim-treesitter/nvim-treesitter-context',
     cond = not vim.g.vscode,
     event = 'BufRead',
-    opts = {
-      max_lines = 3,
-      separator = '_',
-    },
-    config = function(_, opts)
+    opts = function()
       local ts_context = require 'treesitter-context'
-      ts_context.setup(opts)
 
       vim.keymap.set('n', '[c', function()
         ts_context.go_to_context()
       end, { silent = true, desc = 'Jump to context' })
+
+      return {
+        max_lines = 3,
+        separator = '_',
+      }
     end,
   },
   {
