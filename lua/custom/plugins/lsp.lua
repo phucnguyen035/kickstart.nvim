@@ -42,27 +42,11 @@ return {
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
-
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
-
-      -- A simple popup display that provides breadcrumbs like navigation feature but in keyboard centric manner inspired by ranger file manager.
-      {
-        'SmiteshP/nvim-navbuddy',
-        cond = not vim.g.vscode,
-        dependencies = {
-          'SmiteshP/nvim-navic',
-          'MunifTanjim/nui.nvim',
-        },
-        opts = {
-          lsp = { auto_attach = true },
-          highlight = true,
-        },
-      },
     },
     config = function()
       require('lspconfig.ui.windows').default_options = {
@@ -294,5 +278,27 @@ return {
     },
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
+  },
+  -- A simple popup display that provides breadcrumbs like navigation feature but in keyboard centric manner inspired by ranger file manager.
+  {
+    'SmiteshP/nvim-navbuddy',
+    cond = not vim.g.vscode,
+    dependencies = {
+      'SmiteshP/nvim-navic',
+      'MunifTanjim/nui.nvim',
+    },
+    opts = {
+      lsp = { auto_attach = true },
+      highlight = true,
+    },
+    keys = {
+      {
+        '<leader>ss',
+        '<cmd>Navbuddy<cr>',
+        noremap = true,
+        silent = true,
+        desc = 'Search Symbols',
+      },
+    },
   },
 }
