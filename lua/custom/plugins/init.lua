@@ -20,7 +20,6 @@ return {
       local lint = require 'lint'
 
       lint.linters_by_ft = {
-        yaml = { 'actionlint' },
         go = { 'golangcilint' },
       }
 
