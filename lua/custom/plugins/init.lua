@@ -168,6 +168,40 @@ return {
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
     opts = {},
+    keys = {
+      {
+        '<leader>ccq',
+        function()
+          vim.ui.input({
+            prompt = 'Quick Chat: ',
+          }, function(input)
+            if not input or input == '' then
+              return
+            end
+
+            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+          end)
+        end,
+        desc = 'CopilotChat - Quick chat',
+      },
+      {
+        '<leader>cch',
+        function()
+          local actions = require 'CopilotChat.actions'
+          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
+        end,
+        desc = 'CopilotChat - Help actions',
+      },
+      {
+        '<leader>ccp',
+        function()
+          local actions = require 'CopilotChat.actions'
+          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
+        end,
+        mode = { 'n', 'v', 'x' },
+        desc = 'CopilotChat - Prompt actions',
+      },
+    },
   },
   -- Zen Mode
   {
