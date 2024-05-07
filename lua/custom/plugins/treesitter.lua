@@ -11,8 +11,20 @@ return {
     },
     build = ':TSUpdate',
     config = function()
+      local highlight = {
+        'CursorColumn',
+        'Whitespace',
+      }
+
       local ibl = require 'ibl'
-      ibl.setup()
+      ibl.setup {
+        indent = { highlight = highlight, char = '' },
+        whitespace = {
+          highlight = highlight,
+          remove_blankline_trail = false,
+        },
+        scope = { enabled = false },
+      }
 
       local function map(opts)
         return { query = opts.query, desc = 'TS: ' .. opts.desc }
@@ -40,8 +52,10 @@ return {
           -- Elixir stuff
           'elixir',
           'heex',
-          -- Misc
+          -- Go
           'go',
+          'templ',
+          -- Misc
           'lua',
           'python',
           'rust',
