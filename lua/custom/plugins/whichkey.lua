@@ -37,6 +37,7 @@ return {
         g = { '<cmd>tabfirst<cr>', 'Go to first tab' },
         G = { '<cmd>tablast<cr>', 'Go to last tab' },
         n = { '<cmd>tabnew<cr>', 'New tab' },
+        c = { '<cmd>tabclose<cr>', 'Close tab' },
       },
     }
   end,
