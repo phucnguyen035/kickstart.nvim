@@ -168,9 +168,14 @@ return {
             telemetry = { enable = false },
           },
         },
-        -- js stuff
+        htmx = {
+          filetypes = { 'astro', 'templ' },
+        },
+        templ = {},
         html = {},
-        emmet_language_server = {},
+        emmet_language_server = {
+          filetypes = { 'html', 'templ', 'typescriptreact' },
+        },
         cssls = {
           css = {
             validate = true,
@@ -179,46 +184,8 @@ return {
             },
           },
         },
-        tsserver = {
-          typescript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = false,
-              includeInlayVariableTypeHints = false,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayPropertyDeclarationTypeHints = false,
-              includeInlayFunctionLikeReturnTypeHints = false,
-              includeInlayEnumMemberValueHints = true,
-            },
-            implementationsCodeLens = {
-              enabled = true,
-            },
-            referencesCodeLens = {
-              enabled = true,
-              showOnAllFunctions = true,
-            },
-          },
-          javascript = {
-            inlayHints = {
-              includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = false,
-              includeInlayVariableTypeHints = false,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayPropertyDeclarationTypeHints = false,
-              includeInlayFunctionLikeReturnTypeHints = false,
-              includeInlayEnumMemberValueHints = true,
-            },
-            implementationsCodeLens = {
-              enabled = true,
-            },
-            referencesCodeLens = {
-              enabled = true,
-              showOnAllFunctions = true,
-            },
-          },
-        },
+        -- js stuff
+        biome = {},
         astro = {},
         svelte = {},
         volar = {},
@@ -231,15 +198,15 @@ return {
             },
           },
         },
-        eslint = {
-          format = false,
-          codeActionOnSave = {
-            enable = true,
-            mode = 'problems',
-          },
-          -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-          workingDirectories = { mode = 'auto' },
-        },
+        -- eslint = {
+        --   format = false,
+        --   codeActionOnSave = {
+        --     enable = true,
+        --     mode = 'problems',
+        --   },
+        --   -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+        --   workingDirectories = { mode = 'auto' },
+        -- },
         -- Python
         ruff_lsp = {},
         pyright = {
@@ -330,5 +297,24 @@ return {
     },
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
+  },
+  {
+    'pmizio/typescript-tools.nvim',
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {
+      settings = {
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = false,
+          includeInlayVariableTypeHints = false,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = false,
+          includeInlayFunctionLikeReturnTypeHints = false,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
   },
 }
