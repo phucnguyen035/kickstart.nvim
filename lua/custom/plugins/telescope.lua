@@ -52,7 +52,7 @@ return {
     {
       '<leader>?',
       function()
-        require('telescope.builtin').oldfiles()
+        require('telescope.builtin').oldfiles { cwd_only = true }
       end,
       desc = 'Find recently opened files',
     },
