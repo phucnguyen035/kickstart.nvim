@@ -59,5 +59,6 @@ vim.diagnostic.config {
 vim.filetype.add {
   extension = {
     postcss = 'css',
+    templ = 'templ',
   },
 }
