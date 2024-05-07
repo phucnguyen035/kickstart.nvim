@@ -141,13 +141,6 @@ return {
       { '<leader>xr', '<cmd>TroubleRefresh<cr>', desc = 'Trouble Refresh' },
     },
   },
-  -- Free alternative to Copilot
-  -- {
-  --   'Exafunction/codeium.vim',
-  --   cond = not vim.g.vscode,
-  --   event = 'BufEnter',
-  --   cmd = 'Codeium',
-  -- },
   {
     'zbirenbaum/copilot.lua',
     cond = not vim.g.vscode,
