@@ -166,6 +166,13 @@ return {
     opts = {},
     keys = {
       {
+        '<leader>cco',
+        function()
+          require('CopilotChat').open()
+        end,
+        desc = 'CopilotChat - Open',
+      },
+      {
         '<leader>ccq',
         function()
           vim.ui.input({
@@ -179,14 +186,6 @@ return {
           end)
         end,
         desc = 'CopilotChat - Quick chat',
-      },
-      {
-        '<leader>cch',
-        function()
-          local actions = require 'CopilotChat.actions'
-          require('CopilotChat.integrations.telescope').pick(actions.help_actions())
-        end,
-        desc = 'CopilotChat - Help actions',
       },
       {
         '<leader>ccp',
