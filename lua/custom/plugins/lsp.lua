@@ -174,7 +174,7 @@ return {
         templ = {},
         html = {},
         emmet_language_server = {
-          filetypes = { 'html', 'templ', 'typescriptreact' },
+          filetypes = { 'html', 'templ', 'typescriptreact', 'javascript', 'javascriptreact' },
         },
         cssls = {
           css = {
