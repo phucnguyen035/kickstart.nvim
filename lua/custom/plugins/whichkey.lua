@@ -11,6 +11,12 @@ return {
         ['c'] = {
           name = '+chat',
         },
+        f = { '<cmd>Format<cr>', 'Format code', mode = { 'n', 'v' } },
+        t = {
+          name = '+toggle',
+          f = { '<cmd>FormatToggle<cr>', 'Toggle format (global)' },
+          F = { '<cmd>FormatToggle!<cr>', 'Toggle format (buffer)' },
+        },
       },
       ['<leader>h'] = {
         name = '+harpoon',
