@@ -174,7 +174,16 @@ return {
         templ = {},
         html = {},
         emmet_language_server = {
-          filetypes = { 'html', 'templ', 'typescriptreact', 'javascript', 'javascriptreact' },
+          filetypes = {
+            'html',
+            'templ',
+            'typescriptreact',
+            'javascript',
+            'javascriptreact',
+            'astro',
+            'vue',
+            'svelte',
+          },
         },
         cssls = {
           css = {
@@ -261,9 +270,16 @@ return {
         callback = function(args)
           local client_id = args.data.client_id
           local client = vim.lsp.get_client_by_id(client_id)
+          if not client then
+            return
+          end
+
+          if client.supports_method 'textDocument/inlayHint' then
+            vim.lsp.inlay_hint.enable()
+          end
 
           -- Only attach to clients that support document formatting
-          if not client.server_capabilities.documentFormattingProvider then
+          if not client.supports_method 'textDocument/formatting' then
             return
           end
 
@@ -307,12 +323,7 @@ return {
         tsserver_file_preferences = {
           includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
           includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayFunctionParameterTypeHints = false,
-          includeInlayVariableTypeHints = false,
           includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-          includeInlayPropertyDeclarationTypeHints = false,
-          includeInlayFunctionLikeReturnTypeHints = false,
-          includeInlayEnumMemberValueHints = true,
         },
       },
     },
