@@ -308,6 +308,9 @@ return {
     },
     opts = {
       lsp_document_formatting = false, -- Use conform for formatting
+      lsp_inlay_hints = {
+        enable = false,
+      },
       trouble = true,
       luasnip = true,
     },
