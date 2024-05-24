@@ -46,8 +46,8 @@ return {
     opts = {
       options = {
         theme = 'auto',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = '',
+        section_separators = { left = '', right = '' },
         disabled_filetypes = { 'dashboard', 'alpha', 'starter' },
       },
       extensions = {
@@ -56,11 +56,24 @@ return {
       },
       sections = {
         lualine_a = {
-          function()
-            return mode_map[vim.api.nvim_get_mode().mode] or '__'
-          end,
+          { 'mode', separator = { left = '' }, right_padding = 10 },
         },
-        lualine_x = { 'copilot', 'encoding', 'filetype' },
+
+        lualine_b = {
+          { 'filename', path = 0 },
+          'branch',
+        },
+
+        lualine_c = {
+          { 'diff', colored = true, symbols = { added = ' ', modified = ' ', removed = ' ' } },
+          'diagnostics',
+        },
+
+        lualine_x = { 'copilot' },
+        lualine_y = { 'filetype', 'progress' },
+        lualine_z = {
+          { 'location', separator = { right = '' }, left_padding = 2 },
+        },
       },
     },
   },
