@@ -163,7 +163,14 @@ return {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
       { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
     },
-    opts = {},
+    opts = {
+      mappings = {
+        reset = {
+          normal = '<C-r>',
+          insert = '<C-r>',
+        },
+      },
+    },
     keys = {
       {
         '<leader>cco',
