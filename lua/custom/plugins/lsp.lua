@@ -114,6 +114,21 @@ return {
             end,
           })
         end
+
+        if client.name == 'ruff' then
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
+
+        if client.supports_method 'textDocument/codeLens' then
+          vim.lsp.codelens.refresh { bufnr = 0 }
+          vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave' }, {
+            pattern = '<buffer>',
+            callback = function()
+              vim.lsp.codelens.refresh { bufnr = 0 }
+            end,
+          })
+        end
       end
 
       --  Add any additional override configuration in the following tables. They will be passed to
@@ -216,15 +231,48 @@ return {
           -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
           workingDirectories = { mode = 'auto' },
         },
+        vtsls = {
+          typescript = {
+            inlayHints = {
+              parameterNames = {
+                enabled = 'literals',
+              },
+            },
+            implementationCodeLens = {
+              enabled = true,
+              -- showOnInterfaceMethods = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              -- showOnAllFunctions = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              parameterNames = {
+                enabled = 'literals',
+              },
+            },
+            implementationCodeLens = {
+              enabled = true,
+              showOnInterfaceMethods = true,
+            },
+            referencesCodeLens = {
+              enabled = true,
+              showOnAllFunctions = true,
+            },
+          },
+        },
         -- Python
-        ruff_lsp = {},
+        ruff = {},
         pyright = {
+          pyright = {
+            disableOrganizeImports = true,
+          },
           python = {
             analysis = {
-              typeCheckingMode = 'standard',
               autoSearchPaths = true,
               diagnosticMode = 'openFilesOnly',
-              useLibraryCodeForTypes = true,
             },
           },
         },
@@ -315,19 +363,5 @@ return {
     },
     ft = { 'go', 'gomod', 'gohtmltmpl' },
     build = ':lua require("go.install").update_all_sync()',
-  },
-  {
-    'pmizio/typescript-tools.nvim',
-    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {
-      settings = {
-        tsserver_file_preferences = {
-          includeInlayParameterNameHints = 'literals', -- 'none' | 'literals' | 'all'
-          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-        },
-      },
-    },
   },
 }
