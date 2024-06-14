@@ -40,9 +40,6 @@ if not vim.g.vscode then
   vim.o.so = 999
 end
 
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
-
 local _border = 'single'
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = _border,
