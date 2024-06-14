@@ -27,9 +27,6 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
--- Diagnostic keymaps
-map('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-
 map('i', 'jk', '<ESC>', { desc = 'Exit insert mode', nowait = true })
 map('i', '<C-h>', '<Left>', { desc = 'Move left' })
 map('i', '<C-l>', '<Right>', { desc = 'Move right' })
