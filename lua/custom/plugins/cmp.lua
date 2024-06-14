@@ -19,6 +19,7 @@ return {
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp',
       'rafamadriz/friendly-snippets',
+      'luckasRanarison/tailwind-tools.nvim',
       'onsails/lspkind-nvim',
     },
     config = function()
@@ -62,6 +63,12 @@ return {
               fallback()
             end
           end, { 'i', 's' }),
+        },
+
+        formatting = {
+          format = lspkind.cmp_format {
+            before = require('tailwind-tools.cmp').lspkind_format,
+          },
         },
 
         -- formatting = {

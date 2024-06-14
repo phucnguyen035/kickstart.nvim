@@ -167,4 +167,15 @@ return {
       }
     end,
   },
+  {
+    'luckasRanarison/tailwind-tools.nvim',
+    eventg = 'BufRead',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {
+      conceal = {
+        enabled = true,
+        min_length = 50,
+      },
+    },
+  },
 }
