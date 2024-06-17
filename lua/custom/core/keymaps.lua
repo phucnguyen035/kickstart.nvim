@@ -43,6 +43,7 @@ map('n', '<M-O>', '@="m`O<C-V><Esc>``"<CR>', { desc = 'Insert newline above', si
 map('x', 'zV', 'zMzO', { desc = 'Close all except current cursor line', silent = true })
 map('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Previous tab' })
 map('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
+map({ 'n', 'i' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save file' })
 
 if vim.g.vscode then
   map('n', '<leader><space>', '<cmd>Find<cr>')
