@@ -1,18 +1,8 @@
-local section_name = 'Actions'
-local actions = {
-  { name = 'Find files', action = 'Telescope find_files', section = section_name },
-  { name = 'Recent files', action = 'Telescope oldfiles', section = section_name },
-  { name = 'Grep text', action = 'Telescope live_grep', section = section_name },
-  { name = 'Marks', action = 'Telescope harpoon marks', section = section_name },
-  { name = 'Quit', action = 'qa', section = section_name },
-}
-
 return {
   {
     'echasnovski/mini.files',
     cond = not vim.g.vscode,
     version = false,
-    lazy = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
@@ -50,6 +40,7 @@ return {
         local rhs = function()
           -- Make new window and set it as target
           local new_target_window
+          ---@diagnostic disable-next-line: param-type-mismatch
           vim.api.nvim_win_call(mf.get_target_window(), function()
             vim.cmd(direction .. ' split')
             new_target_window = vim.api.nvim_get_current_win()
@@ -97,8 +88,13 @@ return {
       },
     },
   },
-  { 'echasnovski/mini.pairs', version = false, cond = not vim.g.vscode, event = 'InsertEnter', opts = {} },
-  -- { 'echasnovski/mini.indentscope', cond = not vim.g.vscode, version = false, event = 'BufReadPre', opts = {} },
+  {
+    'echasnovski/mini.pairs',
+    version = false,
+    cond = not vim.g.vscode,
+    event = 'InsertEnter',
+    opts = {},
+  },
   {
     'echasnovski/mini.bufremove',
     version = false,
@@ -106,32 +102,21 @@ return {
     opts = {},
     keys = {
       {
+
         '<leader>bd',
         function()
-          require('mini.bufremove').unshow_in_window()
+          require('mini.bufremove').delete()
         end,
         desc = 'Delete buffer',
       },
     },
   },
-  { 'echasnovski/mini.cursorword', cond = not vim.g.vscode, event = 'BufRead', version = false, opts = {} },
   {
-    'echasnovski/mini.sessions',
+    'echasnovski/mini.cursorword',
     cond = not vim.g.vscode,
+    event = 'BufRead',
     version = false,
-    event = 'VimEnter',
-    opts = {
-      file = '', -- Disable local session
-    },
-    keys = {
-      {
-        '<leader>mss',
-        function()
-          require('mini.sessions').select()
-        end,
-        desc = '[S]elect [S]ession',
-      },
-    },
+    opts = {},
   },
   {
     'echasnovski/mini.surround',
@@ -168,17 +153,22 @@ return {
         ]],
         evaluate_single = true,
         items = {
-          actions,
-          starter.sections.sessions(3, true),
-          starter.sections.recent_files(9, true),
+          { name = 'Find files', action = 'Telescope find_files', section = 'Telescope' },
+          { name = 'Recent files', action = "lua require('telescope.builtin').oldfiles({ cwd_only = true })", section = 'Telescope' },
+          { name = 'Grep text', action = 'Telescope live_grep', section = 'Telescope' },
+          { name = 'Harpoon marks', action = 'Telescope harpoon marks', section = 'Telescope' },
+          { name = 'Plugin', action = 'Lazy', section = 'Config' },
+          { name = 'Mason', action = 'Mason', section = 'Config' },
+          { name = 'Session restore', action = "lua require('persistence').load()", section = 'Session' },
+          { name = 'Quit', action = 'qa', section = 'System' },
         },
         content_hooks = {
           starter.gen_hook.adding_bullet(),
-          starter.gen_hook.indexing('all', { 'Sessions', section_name }),
-          starter.gen_hook.padding(3, 2),
           starter.gen_hook.aligning('center', 'center'),
         },
-        footer = '',
+        footer = function()
+          return "Let's get started!"
+        end,
       }
     end,
   },
