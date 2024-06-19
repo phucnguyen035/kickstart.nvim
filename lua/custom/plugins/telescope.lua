@@ -127,5 +127,12 @@ return {
       end,
       desc = 'Fuzzy search current buffer',
     },
+    {
+      '<leader>gb',
+      function()
+        require('telescope.builtin').git_branches()
+      end,
+      desc = 'Find git branches',
+    },
   },
 }
