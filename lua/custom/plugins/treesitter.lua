@@ -140,24 +140,6 @@ return {
     end,
   },
   {
-    -- Display the current context of thhe visible buffer contents
-    'nvim-treesitter/nvim-treesitter-context',
-    cond = not vim.g.vscode,
-    event = 'BufRead',
-    opts = function()
-      local ts_context = require 'treesitter-context'
-
-      vim.keymap.set('n', '[c', function()
-        ts_context.go_to_context()
-      end, { silent = true, desc = 'Jump to context' })
-
-      return {
-        max_lines = 3,
-        separator = '_',
-      }
-    end,
-  },
-  {
     'numToStr/Comment.nvim',
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
     event = 'BufRead',
