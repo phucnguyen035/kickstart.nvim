@@ -4,13 +4,6 @@ end
 
 return {
   {
-    'kdheepak/lazygit.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    keys = {
-      { '<leader>gg', '<cmd>LazyGit<cr>', noremap = true, silent = true, desc = 'Open LazyGit' },
-    },
-  },
-  {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -40,5 +33,24 @@ return {
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'GitSigns Select Hunk')
       end,
     },
+  },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+    },
+    keys = {
+      { '<leader>gs', ':Neogit<cr>', noremap = true, silent = true, desc = 'Neogit' },
+      { '<leader>gc', ':Neogit commit<cr>', desc = 'Git commit' },
+      { '<leader>gP', ':Neogit push<cr>', desc = 'Git push' },
+      { '<leader>gp', ':Neogit pull<cr>', desc = 'Git pull' },
+      { '<leader>gf', ':Neogit fetch<cr>', desc = 'Git fetch', noremap = true, silent = true },
+      { '<leader>gr', ':Neogit rebase<cr>', desc = 'Git rebase' },
+      { '<leader>gm', ':Neogit merge<cr>', desc = 'Git merge' },
+      { '<leader>gZ', ':Neogit stash<cr>', desc = 'Git stash' },
+      { '<leader>gd', ':Neogit diff<cr>', desc = 'Git diff' },
+    },
+    opts = {},
   },
 }
