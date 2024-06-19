@@ -6,12 +6,11 @@ return {
     priority = 1000,
     init = function()
       require('catppuccin').setup {
-        color_overrides = {
-          -- mocha = {
-          --   base = '#000000',
-          --   mantle = '#000000',
-          --   crust = '#000000',
-          -- },
+        transparent_background = true,
+        dim_inactive = {
+          enabled = true,
+          shade = 'dark',
+          percentage = 0.15,
         },
         integrations = {
           harpoon = true,
