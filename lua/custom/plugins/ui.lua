@@ -22,6 +22,9 @@ return {
           cmp = true,
           which_key = true,
           ufo = true,
+          neogit = true,
+          notify = true,
+          noice = true,
         },
       }
 
