@@ -53,6 +53,7 @@ return {
       { '<leader>gm', ':Neogit merge<cr>', desc = 'Git merge', noremap = true, silent = true },
       { '<leader>gZ', ':Neogit stash<cr>', desc = 'Git stash', noremap = true, silent = true },
       { '<leader>gd', ':Neogit diff<cr>', desc = 'Git diff', noremap = true, silent = true },
+      { '<leader>gw', ':Neogit worktree<cr>', desc = 'Git worktree', noremap = true, silent = true },
     },
     opts = {
       console_timeout = 5000,
