@@ -44,7 +44,7 @@ return {
   },
   {
     'folke/noice.nvim',
-    event = 'VeryLazy',
+    lazy = true,
     dependencies = {
       'MunifTanjim/nui.nvim',
       'rcarriga/nvim-notify',
@@ -82,5 +82,51 @@ return {
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     },
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'folke/noice.nvim', 'AndreM222/copilot-lualine' },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'auto',
+          component_separators = '',
+          section_separators = { left = '', right = '' },
+          disabled_filetypes = { 'dashboard', 'alpha', 'starter' },
+        },
+        extensions = {
+          'quickfix',
+          'lazy',
+        },
+        sections = {
+          lualine_a = {
+            'branch',
+          },
+
+          lualine_b = {
+            'diagnostics',
+          },
+
+          lualine_c = {
+            'diff',
+            '%=',
+            { 'filename', path = 1, shorting_target = 10 },
+          },
+
+          lualine_x = {
+            {
+              require('noice').api.statusline.mode.get,
+              cond = require('noice').api.statusline.mode.has,
+              color = { fg = '#ff9e64' },
+            },
+            'copilot',
+          },
+          lualine_y = { 'filetype', 'progress' },
+          lualine_z = {
+            { 'location', separator = { right = '' }, left_padding = 2 },
+          },
+        },
+      }
+    end,
   },
 }
