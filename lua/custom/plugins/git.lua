@@ -11,26 +11,28 @@ return {
       current_line_blame = true,
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
         end
 
-        map('n', ']h', gs.next_hunk, 'Next Hunk')
-        map('n', '[h', gs.prev_hunk, 'Previous Hunk')
-        map({ 'n', 'v' }, '<leader>ghs', ':Gitsigns stage_hunk<cr>', 'Stage Hunk')
-        map({ 'n', 'v' }, '<leader>ghr', ':Gitsigns reset_hunk<cr>', 'Reset Hunk')
-        map('n', '<leader>ghS', gs.stage_buffer, 'Stage Buffer')
-        map('n', '<leader>gha', gs.stage_hunk, 'Stage hunk')
-        map('n', '<leader>ghu', gs.undo_stage_hunk, 'Undo Stage Hunk')
-        map('n', '<leader>ghR', gs.reset_buffer, 'Reset Buffer')
-        map('n', '<leader>ghp', gs.preview_hunk_inline, 'Preview Hunk Inline')
+        map('n', ']h', gs.next_hunk, { desc = 'Next Hunk' })
+        map('n', '[h', gs.prev_hunk, { desc = 'Previous Hunk' })
+        map({ 'n', 'v' }, '<leader>ghs', ':Gitsigns stage_hunk<cr>', { desc = 'Stage Hunk' })
+        map({ 'n', 'v' }, '<leader>ghr', ':Gitsigns reset_hunk<cr>', { desc = 'Reset Hunk' })
+        map('n', '<leader>ghS', gs.stage_buffer, { desc = 'Stage Buffer' })
+        map('n', '<leader>gha', gs.stage_hunk, { desc = 'Stage hunk' })
+        map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = 'Undo Stage Hunk' })
+        map('n', '<leader>ghR', gs.reset_buffer, { desc = 'Reset Buffer' })
+        map('n', '<leader>ghp', gs.preview_hunk_inline, { desc = 'Preview Hunk Inline' })
         map('n', '<leader>ghb', function()
           gs.blame_line { full = true }
-        end, 'Blame Line')
-        map('n', '<leader>ghd', gs.diffthis, 'Diff This')
+        end, { desc = 'Blame Line' })
+        map('n', '<leader>ghd', gs.diffthis, { desc = 'Diff This' })
         map('n', '<leader>ghD', function()
           gs.diffthis '~'
-        end, 'Diff This ~')
+        end, { desc = 'Diff This ~' })
       end,
     },
   },
@@ -51,6 +53,8 @@ return {
       { '<leader>gZ', ':Neogit stash<cr>', desc = 'Git stash' },
       { '<leader>gd', ':Neogit diff<cr>', desc = 'Git diff' },
     },
-    opts = {},
+    opts = {
+      console_timeout = 5000,
+    },
   },
 }
