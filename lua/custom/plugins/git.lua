@@ -42,6 +42,7 @@ return {
       'nvim-lua/plenary.nvim', -- required
       'sindrets/diffview.nvim', -- optional - Diff integration
     },
+    cmd = 'Neogit',
     keys = {
       { '<leader>gs', ':Neogit<cr>', noremap = true, silent = true, desc = 'Neogit' },
       { '<leader>gc', ':Neogit commit<cr>', desc = 'Git commit' },
