@@ -3,7 +3,7 @@ return {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     lazy = false,
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'AndreM222/copilot-lualine' },
     -- See `:help lualine.txt`
     opts = {
       options = {
@@ -38,9 +38,5 @@ return {
         },
       },
     },
-  },
-  {
-    'AndreM222/copilot-lualine',
-    event = 'BufRead',
   },
 }
