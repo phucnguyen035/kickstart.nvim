@@ -14,7 +14,6 @@ return {
         },
         integrations = {
           harpoon = true,
-          mini = true,
           lsp_trouble = true,
           treesitter = true,
           gitsigns = true,
@@ -25,6 +24,11 @@ return {
           neogit = true,
           notify = true,
           noice = true,
+          indent_blankline = {
+            enabled = true,
+            scope_color = 'lavender',
+            colored_indent_levels = false,
+          },
         },
       }
 
