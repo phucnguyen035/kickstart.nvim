@@ -6,19 +6,10 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'JoosepAlviste/nvim-ts-context-commentstring',
-      'lukas-reineke/indent-blankline.nvim',
       'windwp/nvim-ts-autotag',
     },
     build = ':TSUpdate',
     config = function()
-      if not vim.g.vscode then
-        require('ibl').setup {
-          indent = {
-            char = '▏',
-          },
-        }
-      end
-
       local function map(opts)
         return { query = opts.query, desc = 'TS: ' .. opts.desc }
       end

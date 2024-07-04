@@ -172,4 +172,11 @@ return {
       }
     end,
   },
+  {
+    'echasnovski/mini.indentscope',
+    version = false,
+    opts = {
+      symbol = '▏',
+    },
+  },
 }
