@@ -93,20 +93,20 @@ return {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-              [']m'] = { query = '@function.outer', desc = 'Next function start' },
-              [']]'] = { query = '@class.outer', desc = 'Next class start' },
+              [']m'] = map { query = '@function.outer', desc = 'Next function start' },
+              [']]'] = map { query = '@class.outer', desc = 'Next class start' },
             },
             goto_next_end = {
-              [']M'] = { query = '@function.outer', desc = 'Next function end' },
+              [']M'] = map { query = '@function.outer', desc = 'Next function end' },
               [']['] = { query = '@class.outer', desc = 'Next class end' },
             },
             goto_previous_start = {
-              ['[m'] = { query = '@function.outer', desc = 'Previous function start' },
-              ['[['] = { query = '@class.outer', desc = 'Previous class start' },
+              ['[m'] = map { query = '@function.outer', desc = 'Previous function start' },
+              ['[['] = map { query = '@class.outer', desc = 'Previous class start' },
             },
             goto_previous_end = {
-              ['[M'] = { query = '@function.outer', desc = 'Previous function end' },
-              ['[]'] = { query = '@class.outer', desc = 'Previous class end' },
+              ['[M'] = map { query = '@function.outer', desc = 'Previous function end' },
+              ['[]'] = map { query = '@class.outer', desc = 'Previous class end' },
             },
           },
           lsp_interop = {
