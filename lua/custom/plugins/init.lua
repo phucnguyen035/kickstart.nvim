@@ -1,16 +1,4 @@
 return {
-  {
-    'ThePrimeagen/harpoon',
-    cond = not vim.g.vscode,
-    dependencies = 'nvim-lua/plenary.nvim',
-    opts = {},
-    keys = {
-      { '<leader>hm', "<cmd>:lua require('harpoon.mark').add_file()<cr>", desc = '[H]arpoon [M]ark' },
-      { '<leader>ho', "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = '[H]arpoon [O]pen menu' },
-      { '<leader>hn', "<cmd>:lua require('harpoon.ui').nav_next()<cr>", desc = '[H]arpoon [N]ext' },
-      { '<leader>hp', "<cmd>:lua require('harpoon.ui').nav_prev()<cr>", desc = '[H]arpoon [P]revious' },
-    },
-  },
   -- Linter
   {
     'mfussenegger/nvim-lint',
