@@ -24,11 +24,8 @@ return {
       path_display = { 'smart' },
       layout_strategy = 'flex',
       mappings = {
-        i = {
-          ['<esc>'] = 'close',
-        },
         n = {
-          ['jk'] = 'close',
+          ['q'] = 'close',
         },
       },
     },
