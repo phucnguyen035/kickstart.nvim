@@ -60,7 +60,7 @@ return {
     },
     {
       '<leader>,',
-      '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
+      '<cmd>Telescope buffers sort_mru=true sort_lastused=true cwd_only=true<cr>',
       desc = 'Find buffers',
     },
     {
