@@ -4,26 +4,34 @@ return {
   branch = 'harpoon2',
   dependencies = 'nvim-lua/plenary.nvim',
   config = true,
-  keys = {
-    {
-      '<leader>ha',
-      '<cmd>lua require("harpoon"):list():add()<cr>',
-      desc = 'Harpoon add',
-    },
-    {
-      '<leader>hm',
-      '<cmd>lua require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())<cr>',
-      desc = 'Open Harpoon menu',
-    },
-    {
-      '<leader>hp',
-      '<cmd>lua require("harpoon"):list():prev()<cr>',
-      desc = 'Harpoon previous item',
-    },
-    {
-      '<leader>hn',
-      '<cmd>lua require("harpoon"):list():next()<cr>',
-      desc = 'Harpoon next item',
-    },
-  },
+  keys = function()
+    local keys = {
+      {
+        '<leader>H',
+        function()
+          require('harpoon'):list():add()
+        end,
+        desc = 'Harpoon File',
+      },
+      {
+        '<leader>h',
+        function()
+          local harpoon = require 'harpoon'
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = 'Harpoon Quick Menu',
+      },
+    }
+
+    for i = 1, 5 do
+      table.insert(keys, {
+        '<leader>' .. i,
+        function()
+          require('harpoon'):list():select(i)
+        end,
+        desc = 'Harpoon to File ' .. i,
+      })
+    end
+    return keys
+  end,
 }
