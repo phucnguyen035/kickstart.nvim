@@ -65,7 +65,7 @@ return {
     end,
     keys = {
       {
-        '<leader>fd',
+        '<leader>fm',
         function()
           local mf = require 'mini.files'
           local path = vim.api.nvim_buf_get_name(0)
@@ -76,15 +76,15 @@ return {
 
           mf.open(path)
         end,
-        desc = 'Open files in directory',
+        desc = 'Open mini.files',
         silent = true,
       },
       {
-        '<leader>fr',
+        '<leader>fM',
         function()
           require('mini.files').open(nil, false)
         end,
-        desc = 'Open files in root directory',
+        desc = 'Open mini.files (cwd)',
       },
     },
   },

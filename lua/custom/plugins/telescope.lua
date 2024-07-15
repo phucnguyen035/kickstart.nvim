@@ -27,6 +27,9 @@ return {
         n = {
           ['q'] = 'close',
         },
+        i = {
+          ['<C-q>'] = 'close',
+        },
       },
     },
     extensions = {
@@ -46,88 +49,58 @@ return {
   end,
   keys = {
     {
-      '<leader>?',
-      function()
-        require('telescope.builtin').oldfiles { cwd_only = true }
-      end,
-      desc = 'Find recently opened files',
+      '<leader>:',
+      '<cmd>Telescope command_history<cr>',
+      desc = 'Command history',
     },
     {
-      '<leader><space>',
-      function()
-        require('telescope.builtin').buffers()
-      end,
+      '<leader>fr',
+      '<cmd>Telescope oldfiles cwd_only=true<cr>',
+      desc = 'Find recent files (cwd)',
+    },
+    {
+      '<leader>,',
+      '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
       desc = 'Find buffers',
     },
     {
-      '<leader>ff',
-      function()
-        local function is_git_repo()
-          vim.fn.system 'git rev-parse --is-inside-work-tree'
-          return vim.v.shell_error == 0
-        end
-        local function get_git_root()
-          local dot_git_path = vim.fn.finddir('.git', '.;')
-          return vim.fn.fnamemodify(dot_git_path, ':h')
-        end
-        local opts = {}
-        if is_git_repo() then
-          opts = {
-            cwd = get_git_root(),
-          }
-        end
-
-        require('telescope.builtin').find_files(opts)
-      end,
+      '<leader><space>',
+      '<cmd>Telescope find_files<cr>',
       desc = 'Find files from project root',
     },
     {
       '<leader>fg',
-      function()
-        require('telescope.builtin').git_files()
-      end,
+      '<cmd>Telescope git_files<cr>',
       desc = 'Find git files',
     },
     {
       '<leader>sh',
-      function()
-        require('telescope.builtin').help_tags()
-      end,
-      desc = 'Search help',
+      '<cmd>Telescope help_tags<cr>',
+      desc = 'Search help pages',
     },
     {
       '<leader>sg',
-      function()
-        require('telescope.builtin').live_grep()
-      end,
-      desc = 'Search grep',
+      '<cmd>Telescope live_grep<cr>',
+      desc = 'Grep',
     },
     {
       '<leader>sw',
-      function()
-        require('telescope.builtin').grep_string()
-      end,
+      '<cmd>Telescope grep_string word_match=-w<cr>',
       desc = 'Search current word',
     },
     {
       '<leader>sc',
-      function()
-        require('telescope.builtin').resume()
-      end,
+      '<cmd>Telescope resume<cr>',
       desc = 'Continue search',
     },
     {
       '<leader>sb',
-      function()
-        require('telescope.builtin').current_buffer_fuzzy_find { skip_empty_lines = true, previewer = false }
-      end,
+      '<cmd>Telescope current_buffer_fuzzy_find skip_empty_lines=true previewer=false<cr>',
       desc = 'Fuzzy search current buffer',
     },
     {
       '<leader>gb',
-      function()
-        require('telescope.builtin').git_branches()
-      end,
+      '<cmd>Telescope git_branches<cr>',
       desc = 'Find git branches',
     },
   },
