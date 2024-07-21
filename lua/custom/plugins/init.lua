@@ -42,7 +42,11 @@ return {
             ['end'] = { args.line2, end_line:len() },
           }
         end
-        conform.format { async = true, lsp_fallback = true, range = range }
+        conform.format {
+          range,
+          async = true,
+          lsp_format = 'fallback',
+        }
       end, { range = true })
 
       vim.api.nvim_create_user_command('FormatToggle', function(args)
@@ -76,39 +80,39 @@ return {
       })
     end,
     opts = function()
-      local slow_format_filetypes = {}
+      local formatters_by_ft = {
+        lua = { 'stylua' },
+        go = { 'gofumpt', 'goimports', 'golines' },
+      }
+
+      local frontend = {
+        'astro',
+        'css',
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'html',
+      }
+
+      for _, ft in ipairs(frontend) do
+        formatters_by_ft[ft] = { 'prettierd', 'biome', stop_after_first = true }
+      end
 
       return {
         notify_on_error = false,
-        formatters_by_ft = {
-          lua = { 'stylua' },
-          astro = { { 'prettierd', 'biome' } },
-          javascript = { { 'prettierd', 'biome' } },
-          javascriptreact = { { 'prettierd', 'biome' } },
-          typescript = { { 'prettierd', 'biome' } },
-          typescriptreact = { { 'prettierd', 'biome' } },
-          css = { { 'prettierd', 'biome' } },
-          html = { { 'prettierd', 'biome' } },
-          go = { 'gofumpt', 'goimports', 'golines' },
-          json = { { 'jq', 'prettierd', 'biome' } },
+        default_format_opts = {
+          lsp_format = 'fallback',
         },
+        formatters_by_ft,
         format_on_save = function(bufnr)
-          if slow_format_filetypes[vim.bo[bufnr].filetype] then
-            return
-          end
-
-          -- Disable with a global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
             return
           end
 
-          local function on_format(err)
-            if err and err:match 'timeout$' then
-              slow_format_filetypes[vim.bo[bufnr].filetype] = true
-            end
-          end
-
-          return { timeout_ms = 500, lsp_fallback = true }, on_format
+          return {
+            timeout_ms = 500,
+          }
         end,
       }
     end,
@@ -197,11 +201,9 @@ return {
           vim.ui.input({
             prompt = 'Quick Chat: ',
           }, function(input)
-            if not input or input == '' then
-              return
+            if input ~= '' then
+              require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
             end
-
-            require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
           end)
         end,
         desc = 'CopilotChat - Quick chat',
