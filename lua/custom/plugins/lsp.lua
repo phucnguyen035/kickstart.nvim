@@ -322,7 +322,9 @@ return {
           end
 
           if client.supports_method 'textDocument/inlayHint' then
-            vim.lsp.inlay_hint.enable()
+            vim.keymap.set('n', '<leader>th', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { buffer = args.buffer })
+            end, { buffer = args.buffer, desc = 'Toggle inlay hints' })
           end
 
           -- Only attach to clients that support document formatting
