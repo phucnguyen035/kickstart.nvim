@@ -276,6 +276,72 @@ return {
             },
           },
         },
+        jsonls = {
+          json = {
+            schemas = {
+              {
+                fileMatch = { 'package.json' },
+                url = 'https://json.schemastore.org/package.json',
+              },
+              {
+                fileMatch = { 'tsconfig.json' },
+                url = 'https://json.schemastore.org/tsconfig.json',
+              },
+              {
+                fileMatch = { '.eslintrc', '.eslintrc.json' },
+                url = 'https://json.schemastore.org/eslintrc.json',
+              },
+              {
+                fileMatch = { '.prettierrc', '.prettierrc.json' },
+                url = 'https://json.schemastore.org/prettierrc.json',
+              },
+              {
+                fileMatch = { '.babelrc', '.babelrc.json', 'babel.config.json' },
+                url = 'https://json.schemastore.org/babelrc.json',
+              },
+              {
+                fileMatch = { 'lerna.json' },
+                url = 'https://json.schemastore.org/lerna.json',
+              },
+              {
+                fileMatch = { 'now.json', 'vercel.json' },
+                url = 'https://json.schemastore.org/now.json',
+              },
+              {
+                fileMatch = { 'tsconfig.base.json' },
+                url = 'https://json.schemastore.org/tsconfig.base.json',
+              },
+              {
+                fileMatch = { 'tsconfig.common.json' },
+                url = 'https://json.schemastore.org/tsconfig.common.json',
+              },
+              {
+                fileMatch = { 'tsconfig.eslint.json' },
+                url = 'https://json.schemastore.org/tsconfig.eslint.json',
+              },
+              {
+                fileMatch = { 'tsconfig.jest.json' },
+                url = 'https://json.schemastore.org/tsconfig.jest.json',
+              },
+              {
+                fileMatch = { 'tsconfig.paths.json' },
+                url = 'https://json.schemastore.org/tsconfig.paths.json',
+              },
+              {
+                fileMatch = { 'tsconfig.prisma.json' },
+                url = 'https://json.schemastore.org/tsconfig.prisma.json',
+              },
+              {
+                fileMatch = { 'tsconfig.storybook.json' },
+                url = 'https://json.schemastore.org/tsconfig.storybook.json',
+              },
+              {
+                fileMatch = { 'biome.json' },
+                url = 'https://biomejs.dev/schemas/1.8.3/schema.json',
+              },
+            },
+          },
+        },
       }
 
       -- Setup neovim lua configuration
