@@ -65,7 +65,7 @@ return {
     end,
     keys = {
       {
-        '<leader>fm',
+        '<leader>e',
         function()
           local mf = require 'mini.files'
           local path = vim.api.nvim_buf_get_name(0)
@@ -80,7 +80,7 @@ return {
         silent = true,
       },
       {
-        '<leader>fM',
+        '<leader>E',
         function()
           require('mini.files').open(nil, false)
         end,
