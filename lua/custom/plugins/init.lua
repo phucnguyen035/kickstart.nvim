@@ -55,12 +55,12 @@ return {
           local next = not current
           -- FormatToggle! will disable formatting just for this buffer
           vim.b.disable_autoformat = next
-          print('Autoformat ' .. (next and 'disabled' or 'enabled') .. ' for this buffer')
+          vim.notify('Autoformat ' .. (next and 'disabled' or 'enabled') .. ' (buffer)')
         else
           local current = vim.g.disable_autoformat
           local next = not current
           vim.g.disable_autoformat = next
-          print('Autoformat ' .. (next and 'disabled' or 'enabled') .. ' globally')
+          vim.notify('Autoformat ' .. (next and 'disabled' or 'enabled') .. '(global)')
         end
       end, {
         desc = 'Toggle autoformat-on-save',
@@ -69,11 +69,11 @@ return {
 
       vim.api.nvim_create_user_command('FormatStatus', function()
         if vim.b.disable_autoformat == true then
-          print 'Autoformat is disabled for this buffer'
+          vim.notify 'Autoformat disabled (buffer)'
         elseif vim.g.disable_autoformat == true then
-          print 'Autoformat is disabled globally'
+          vim.notify 'Autoformat disabled (global)'
         else
-          print 'Autoformat is enabled'
+          vim.notify 'Autoformat enabled'
         end
       end, {
         desc = 'Show autoformat status',
@@ -101,9 +101,6 @@ return {
 
       return {
         notify_on_error = false,
-        default_format_opts = {
-          lsp_format = 'fallback',
-        },
         formatters_by_ft,
         format_on_save = function(bufnr)
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -112,6 +109,7 @@ return {
 
           return {
             timeout_ms = 500,
+            lsp_format = 'fallback'
           }
         end,
       }
