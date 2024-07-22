@@ -175,7 +175,7 @@ return {
     event = 'BufRead',
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
-      { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      { 'nvim-lua/plenary.nvim' },  -- for curl, log wrapper
     },
     opts = {
       mappings = {
@@ -183,8 +183,15 @@ return {
           normal = '<C-r>',
           insert = '<C-r>',
         },
+        complete = {
+          insert = '',
+        },
       },
     },
+    config = function(_, opts)
+      require('CopilotChat.integrations.cmp').setup()
+      require('CopilotChat').setup(opts)
+    end,
     keys = {
       {
         '<leader>cco',
