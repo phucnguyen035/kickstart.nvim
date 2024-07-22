@@ -120,8 +120,33 @@ return {
     'folke/trouble.nvim',
     cond = not vim.g.vscode,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {},
     cmd = 'Trouble',
+    opts = {
+      focus = true,
+      modes = {
+        lsp_references = {
+          params = {
+            include_declaration = false,
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      require('trouble').setup(opts)
+
+      -- Open Trouble Quickfix List when opening a quickfix window
+      -- NOTE: This will block quickflix list for other things
+      vim.api.nvim_create_autocmd('BufRead', {
+        callback = function(ev)
+          if vim.bo[ev.buf].buftype == 'quickfix' then
+            vim.schedule(function()
+              vim.cmd [[cclose]]
+              vim.cmd [[Trouble qflist open]]
+            end)
+          end
+        end,
+      })
+    end,
     keys = {
       {
         '<leader>xx',
