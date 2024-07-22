@@ -404,6 +404,19 @@ return {
             return
           end
 
+          if client.name == 'vtsls' then
+            vim.keymap.set('n', '<leader>cu', function()
+              vim.lsp.buf.code_action {
+                apply = true,
+                context = {
+                  ---@diagnostic disable-next-line: assign-type-mismatch
+                  only = { 'source.removeUnused.ts' },
+                  diagnostics = {},
+                },
+              }
+            end, { buffer = args.buffer, desc = 'Remove unused' })
+          end
+
           -- Big hack for svelte https://www.reddit.com/r/neovim/comments/1598ewp/neovim_svelte/
           vim.api.nvim_create_autocmd({ 'BufWrite' }, {
             pattern = { '+page.server.ts', '+page.ts', '+layout.server.ts', '+layout.ts' },
